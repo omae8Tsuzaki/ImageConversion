@@ -1,0 +1,21 @@
+@charset "UTF-8";
+
+.drop-area {
+	width: 300px;
+	height: 200px;
+	background-color: #FFFFDD;
+}
+
+.preview-area {
+	width: 300px;
+	height: 200px;
+	background-color: #a9a9a9
+}
+
+#input-image {
+	width: 150px; 
+	height: 100px;
+	border : solid;
+	background-color: white;
+	border: solid;
+}
