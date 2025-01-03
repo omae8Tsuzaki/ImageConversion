@@ -55,7 +55,7 @@ public class InputImageServlet extends HttpServlet {
             // 画像のURLを作成
             String fileUrl = request.getContextPath() + "/" + UPLOAD_DIR + "/" + fileName;
             
-            RequestDispatcher rd = request.getRequestDispatcher("/Menu.jsp");
+            RequestDispatcher rd = request.getRequestDispatcher("/conversion.jsp");
     		request.setAttribute("", fileUrl);
     		rd.forward(request, response);
 		} catch (Exception e) {

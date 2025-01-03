@@ -11,7 +11,7 @@
 <body>
 <h1>画像変換アプリ</h1>
 変換したい画像を選んでください．
-	<div class="drop-area">
+	<div class="input-area">
 		<p>ドラッグ&amp;ドロップしてください</p>
 		<form action="inputImage" method="post" enctype="multipart/form-data">
 			<div id="input-image">
@@ -23,11 +23,18 @@
 			<button type="submit">変換</button>
 		</form>
 	</div>
-	<div class="preview-area" id="preview">
+	
+	<div class="input-area">
+		<p>プレビュー</p>
+	</div>
+	
+	<div class="output-preview-area" id="preview">
 		<p>画像表示</p>
 		<div>
 			<!-- サーブレットからリダイレクトされた画像URLを取得 -->
-			<img alt="変換画像" src='<c:out value="${outimgUrl}" />'>
+			<%-- <img alt="変換画像" src='<c:out value="${outimgUrl}" />'> --%>
+			<p><c:out value="${outimgUrl}"></c:out>
+			</p>
 		</div>
 	</div>
 </body>
