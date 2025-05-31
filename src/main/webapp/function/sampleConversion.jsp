@@ -5,10 +5,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>画像変換アプリ</title>
-<link rel="stylesheet" type="text/css" href="design.css">
+<title>画像変換アプリサンプル</title>
+<link rel="stylesheet" type="text/css" href="../css/design.css">
 </head>
 <body>
+<!-- メニューバー -->
+<script src="../js/header.js"></script>
 <h1>画像変換アプリ</h1>
 変換したい画像を選んでください．
 	<div class="input-area">
@@ -37,5 +39,7 @@
 			</p>
 		</div>
 	</div>
+	<!-- フッター -->
+	<script src="../js/footer.js"></script>
 </body>
 </html>
