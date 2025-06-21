@@ -3,7 +3,11 @@
  */
 
 function common() {
-	const input = document.querySelector(".input");
+	const input = document.querySelector("#file-input");// idセレクタ
+	if (!input) {
+	   console.error("要素 #file-input が見つかりません．");
+	   return;
+	}
 	console.log("jsが通ることを確認");
 	// 読み込み後の処理
 	input.addEventListener(`change`, (e) => {
@@ -30,7 +34,11 @@ function common() {
 			imgElm.src = e.target.result;
 			
 			// プレビューエリアの取得とクリア
-			const preview = document.querySelector(".preview");
+			const preview = document.querySelector(".preview");// クラスセレクタ
+			if (!preview) {
+				console.error("要素 .preview が見つかりません．");
+			    return;
+			}
 			preview.innerHTML = "";
 			preview.appendChild(imgElm);
 		});

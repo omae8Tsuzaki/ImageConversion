@@ -9,37 +9,40 @@
 <link rel="stylesheet" type="text/css" href="../css/design.css">
 </head>
 <body>
-<!-- メニューバー -->
-<script src="../js/header.js"></script>
-<h1>画像変換アプリ</h1>
-変換したい画像を選んでください．
+	<!-- メニューバー -->
+	<script src="../js/header.js"></script>
+	<h1>画像変換アプリ</h1>
+	<a href="../home/Menu.html">戻る</a>
+
+	<a>表示したい画像を選んでください．</a>
 	<div class="input-area">
 		<p>ドラッグ&amp;ドロップしてください</p>
-		<form action="inputImage" method="post" enctype="multipart/form-data">
+		<form action="${pageContext.request.contextPath}/function/inputImage" method="post" enctype="multipart/form-data">
 			<div id="input-image">
 				<label for="file-input" style="cursor: pointer;">
 				ここに画像をドラッグ＆ドロップしてください
 				</label>
-				<input type="file" name="file" id="file-input" accept="image/*" style="display: none;" onchange="this.form.submit()">
+				<input type="file" name="imageFile" id="file-input" accept="image/*" style="display: none;">
 			</div>
 			<button type="submit">変換</button>
 		</form>
 	</div>
 	
-	<div class="input-area">
+	<div class="preview">
 		<p>プレビュー</p>
+		<!-- JavaScriptで画像を表示 -->
 	</div>
 	
-	<div class="output-preview-area" id="preview">
+	<div class="output-preview-area">
 		<p>画像表示</p>
-		<div>
-			<!-- サーブレットからリダイレクトされた画像URLを取得 -->
-			<%-- <img alt="変換画像" src='<c:out value="${outimgUrl}" />'> --%>
-			<p><c:out value="${outimgUrl}"></c:out>
-			</p>
-		</div>
+		<c:if test="${not empty base64Image}">
+	        <h3>リサイズされた画像</h3>
+	        <a><img src="data:image/jpeg;base64,${base64Image}" alt="リサイズされた画像"/></a>
+    	</c:if>
 	</div>
+	
 	<!-- フッター -->
 	<script src="../js/footer.js"></script>
 </body>
+<script type="text/javascript" src="../js/common.js"></script>
 </html>

@@ -1,0 +1,24 @@
+plugins {
+	id 'java'
+    id 'eclipse'
+    id 'application'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.9.1'
+    implementation 'com.google.guava:guava:31.1-jre'
+    
+    implementation("javax.servlet:javax.servlet-api:4.0.1")
+}
+
+application {
+    mainClass = 'gradlepracticeapp.App'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}

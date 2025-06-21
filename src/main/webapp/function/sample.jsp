@@ -11,6 +11,7 @@
 	<!-- メニューバー -->
 	<script src="../js/header.js"></script>
 	<h1>テスト用JSP</h1>
+	<h2><a href="../function/sampleCalc.jsp">計算</a></h2>
 	<!-- フッター -->
 	<script src="../js/footer.js"></script>
 </body>
