@@ -4,15 +4,30 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>サンプルページ</title>
+<title>サンプル一覧</title>
 <link rel="stylesheet" type="text/css" href="../css/design.css">
 </head>
 <body>
 	<!-- メニューバー -->
 	<script src="../js/header.js"></script>
-	<h1>テスト用JSP</h1>
-	<h2><a href="../function/sampleCalc.jsp">計算</a></h2>
+	<h1 style="text-align: center;">サンプル一覧</h1>
+	<a href="../home/Menu.html">戻る</a>
+	
+	<div class="container">
+		<div class="box">
+			<a href="../function/sampleCalc.jsp">計算サンプル</a>
+		</div>
+		<div class="box">
+			<a href="../function/sampleConversion.jsp">画像表示サンプル</a>
+		</div>
+		<div class="box">
+			<a href="../exceptionMessage.jsp">例外ページ</a>
+		</div>
+	</div>
+
 	<!-- フッター -->
-	<script src="../js/footer.js"></script>
+	<div>
+		<script src="../js/footer.js"></script>
+	</div>
 </body>
 </html>

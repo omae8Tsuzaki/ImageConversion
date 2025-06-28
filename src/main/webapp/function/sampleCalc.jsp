@@ -14,7 +14,7 @@
 	<h1 style="text-align: center;">サンプル計算用</h1>
 	<a href="../home/Menu.html">戻る</a>
 	
-	<form action="/function/sampleCalc" method="get">
+	<form action="${pageContext.request.contextPath}/function/sampleCalc" method="get">
 		<h2>足し算フォーム</h2>
 		<input type="text" name="num1" placeholder="数値1" required>
 		+ 
@@ -25,6 +25,8 @@
 	<c:out value="${result}" default="未入力"></c:out>
 	
 	<!-- フッター -->
-	<script src="../js/footer.js"></script>
+	<div>
+		<script src="../js/footer.js"></script>
+	</div>
 </body>
 </html>

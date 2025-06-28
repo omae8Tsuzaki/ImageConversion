@@ -1,20 +1,18 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>変更履歴</title>
+<title>拡張子変換</title>
 <link rel="stylesheet" type="text/css" href="../css/design.css">
 </head>
 <body>
 	<!-- メニューバー -->
 	<script src="../js/header.js"></script>
-	<h1 style="text-align: center;">変更履歴</h1>
+	<h1 style="text-align: center;">拡張子変換</h1>
 	<a href="../home/Menu.html">戻る</a>
-	
-	<ul>
-		<li>バージョン1.0.0 開発開始</li>
-	</ul>
-	
+
 	<!-- フッター -->
 	<div>
 		<script src="../js/footer.js"></script>

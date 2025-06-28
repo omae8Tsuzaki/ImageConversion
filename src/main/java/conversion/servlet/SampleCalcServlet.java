@@ -13,7 +13,7 @@ import logic.CalcImpl;
 /**
  * Servlet implementation class SampleCalcServlet
  */
-@WebServlet("/sampleCalc")
+@WebServlet("/function/sampleCalc")
 public class SampleCalcServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -22,14 +22,12 @@ public class SampleCalcServlet extends HttpServlet {
      */
     public SampleCalcServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 		String num1Str = request.getParameter("num1");
 		String num2Str = request.getParameter("num2");

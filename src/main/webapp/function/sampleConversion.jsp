@@ -42,7 +42,9 @@
 	</div>
 	
 	<!-- フッター -->
-	<script src="../js/footer.js"></script>
+	<div>
+		<script src="../js/footer.js"></script>
+	</div>
 </body>
 <script type="text/javascript" src="../js/common.js"></script>
 </html>
