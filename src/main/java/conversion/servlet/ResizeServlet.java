@@ -61,7 +61,7 @@ public class ResizeServlet extends HttpServlet {
             newHeight = Integer.parseInt(heightParam);
 		} catch (NumberFormatException e) {
 			request.setAttribute("exception", "幅と高さは数値で入力してください");
-			request.getRequestDispatcher("/exceptionMessage.jsp").forward(request, response);
+			request.getRequestDispatcher("/function/exceptionMessage.jsp").forward(request, response);
 			return;
 		}
         
@@ -69,7 +69,7 @@ public class ResizeServlet extends HttpServlet {
         try (InputStream inputStream = filePart.getInputStream()) {
         	BufferedImage originalImage = ImageIO.read(inputStream);
         	if(originalImage == null) {
-            	RequestDispatcher rd = request.getRequestDispatcher("/exceptionMessage.jsp");
+            	RequestDispatcher rd = request.getRequestDispatcher("/function/exceptionMessage.jsp");
     			request.setAttribute("exception", "無効な画像ファイルです");
     			rd.forward(request, response);
     			return;

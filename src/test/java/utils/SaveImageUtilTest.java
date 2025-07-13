@@ -14,15 +14,18 @@ import org.junit.jupiter.api.io.TempDir;
 
 /**
  * <p>{@link SaveImageUtil}のテストクラス。</p>
+ * 
+ * <ul>
+ * <li>{@link #saveImageSuccess01}正常系</li>
+ * </ul>
  */
-
 public class SaveImageUtilTest {
 	// テスト用
 	@TempDir
     File temporaryFolder;
 	
 	@Test
-	public void testSaveImage01() throws Exception {
+	public void saveImageSuccess01() throws Exception {
 		// モックのPartオブジェクトを作成
 		Part mockPart = mock(Part.class);
 		String fileName = "test_image.jpg";

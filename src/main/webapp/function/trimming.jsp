@@ -1,39 +1,40 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<link rel="stylesheet" type="text/css" href="../css/design.css">
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>画像サイズ変更</title>
-<link rel="stylesheet" type="text/css" href="../css/design.css">
+<title>トリミング</title>
 </head>
 <body>
 	<!-- ヘッダー -->
 	<div>
 		<script src="../js/header.js"></script>
-		<h1 style="text-align: center;">画像サイズ変更</h1>
+		<h1 style="text-align: center;">トリミング</h1>
 		<a href="../home/Menu.html">戻る</a>
 	</div>
-
-	<form action="${pageContext.request.contextPath}/function/resize" method="post" enctype="multipart/form-data">
+	
+	<form action="${pageContext.request.contextPath}/function/trimming" method="post" enctype="multipart/form-data">
 		<p>画像をアップロードしてください．</p>
 		<input type="file" id="file-input" name="imageFile" accept="image/*"><br>
 		<div class="preview">
 			<p>アップロードするファイルが選択されていません．</p>
 		</div>
-		<p>幅: <input type="number" name="width" required min="1"></p>
-        <p>高さ: <input type="number" name="height" required min="1"></p>
+		<p>x: <input type="number" name="x" required min="1"></p>
+        <p>y: <input type="number" name="y" required min="1"></p>
+        <p>width: <input type="number" name="width" required min="1"></p>
+        <p>height: <input type="number" name="height" required min="1"></p>
 		<button type="submit">変換</button>
 	</form>
 	
 	<!-- サイズ変更後の画像 -->
 	<c:if test="${not empty base64Image}">
-        <h3>リサイズされた画像</h3>
-        <a><img src="data:image/jpeg;base64,${base64Image}" alt="リサイズされた画像"/></a>
+        <h3>トリミングされた画像</h3>
+        <a><img src="data:image/jpeg;base64,${base64Image}" alt="トリミングされた画像"/></a>
     </c:if>
-	
-	<!-- 画像の表示 -->
+
+    <!-- 画像表示 -->
 	<script type="text/javascript" src="../js/common.js"></script>
 	<!-- フッター -->
 	<div>

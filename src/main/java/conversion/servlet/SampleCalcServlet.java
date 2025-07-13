@@ -39,7 +39,7 @@ public class SampleCalcServlet extends HttpServlet {
 		} catch (NumberFormatException e) {
 			// 数値変換に失敗した場合はエラーメッセージを設定
 			request.setAttribute("error", "数値を入力してください");
-			request.getRequestDispatcher("/exceptionMessage.jsp").forward(request, response);
+			request.getRequestDispatcher("/function/exceptionMessage.jsp").forward(request, response);
 			return;
 		}
 		

@@ -46,7 +46,7 @@ public class InputImageServlet extends HttpServlet {
 		try (InputStream inputStream = filePart.getInputStream()) {
 			BufferedImage originalImage = ImageIO.read(inputStream);
 			if (originalImage == null) {
-				RequestDispatcher rd = request.getRequestDispatcher("/exceptionMessage.jsp");
+				RequestDispatcher rd = request.getRequestDispatcher("/function/exceptionMessage.jsp");
 				request.setAttribute("exception", "無効な画像ファイルです");
 				rd.forward(request, response);
 				return;

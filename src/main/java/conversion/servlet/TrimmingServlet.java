@@ -16,54 +16,53 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
-import utils.ImageExtension;
 import utils.Sanitize;
 
 /**
- * <p>画像の拡張子を変更するサーブレット。</p>
+ * <p>画像のトリミングを行うサーブレット。</p>
  */
-@WebServlet("/function/changeExtension")
+@WebServlet("/function/trimming")
 @MultipartConfig
-public class ChangeExtensionServlet extends HttpServlet {
+public class TrimmingServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public ChangeExtensionServlet() {
-        super();
-    }
+
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public TrimmingServlet() {
+		super();
+	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		response.sendRedirect("/function/trimming.jsp");
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// パラメータを取得
 		Part filePart = request.getPart("imageFile");
-		String newExtension = request.getParameter("newExtension");
+		String xParam = request.getParameter("x");
+		String yParam = request.getParameter("y");
+		String widthParam = request.getParameter("width");
+		String heightParam = request.getParameter("height");
 		// 入力確認
 		if (filePart == null || filePart.getSize() == 0) {
 			response.sendRedirect("/function/trimming.jsp");
 			return;
 		}
-		
-		// 拡張子確認
-		String fileExtension = Sanitize.getFileExtension(filePart.getSubmittedFileName());
-		if(!ImageExtension.isValidExtension(fileExtension)) {
-			RequestDispatcher rd = request.getRequestDispatcher("/function/exceptionMessage.jsp");
-		    request.setAttribute("exception", "無効な拡張子です: " + fileExtension);
-		    rd.forward(request, response);
-		    return;
-		}
-		
-		try(InputStream inputStream = filePart.getInputStream()) {
+		int x = Sanitize.parseStringToInt(xParam);
+		int y = Sanitize.parseStringToInt(yParam);
+		int width = Sanitize.parseStringToInt(widthParam);
+		int height = Sanitize.parseStringToInt(heightParam);
+
+		try (InputStream inputStream = filePart.getInputStream()) {
 			BufferedImage originalImage = ImageIO.read(inputStream);
 			if (originalImage == null) {
 				RequestDispatcher rd = request.getRequestDispatcher("/function/exceptionMessage.jsp");
@@ -71,9 +70,25 @@ public class ChangeExtensionServlet extends HttpServlet {
 				rd.forward(request, response);
 				return;
 			}
+			// トリミング範囲のチェック
+			if ( x < 0 || y < 0 || 
+				originalImage.getWidth() < x || 
+				originalImage.getHeight() < y ||
+				width <= 0 || height <= 0 ||
+				x + width > originalImage.getWidth() || 
+				y + height > originalImage.getHeight()) {
+				
+				RequestDispatcher rd = request.getRequestDispatcher("/function/exceptionMessage.jsp");
+				request.setAttribute("exception", "トリミング範囲が不正です");
+				rd.forward(request, response);
+				return;
+			}
+
+			// トリミング処理
+			BufferedImage trimingImage = originalImage.getSubimage(x, y, width, height);
 			
 			ByteArrayOutputStream baos = new ByteArrayOutputStream();
-			ImageIO.write(originalImage, "jpg", baos);
+			ImageIO.write(trimingImage, "jpg", baos);
 			byte[] imageBytes = baos.toByteArray();
 			String base64Image = Base64.getEncoder().encodeToString(imageBytes);
 			

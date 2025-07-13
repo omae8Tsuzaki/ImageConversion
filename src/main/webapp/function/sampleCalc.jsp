@@ -9,10 +9,12 @@
 <link rel="stylesheet" type="text/css" href="../css/design.css">
 </head>
 <body>
-	<!-- メニューバー -->
-	<script src="../js/header.js"></script>
-	<h1 style="text-align: center;">サンプル計算用</h1>
-	<a href="../home/Menu.html">戻る</a>
+	<!-- ヘッダー -->
+	<div>
+		<script src="../js/header.js"></script>
+		<h1 style="text-align: center;">サンプル計算用</h1>
+		<a href="../home/Menu.html">戻る</a>
+	</div>
 	
 	<form action="${pageContext.request.contextPath}/function/sampleCalc" method="get">
 		<h2>足し算フォーム</h2>

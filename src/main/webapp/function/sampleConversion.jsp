@@ -9,10 +9,12 @@
 <link rel="stylesheet" type="text/css" href="../css/design.css">
 </head>
 <body>
-	<!-- メニューバー -->
-	<script src="../js/header.js"></script>
-	<h1>画像変換アプリ</h1>
-	<a href="../home/Menu.html">戻る</a>
+	<!-- ヘッダー -->
+	<div>
+		<script src="../js/header.js"></script>
+		<h1>画像変換アプリ</h1>
+		<a href="../home/Menu.html">戻る</a>
+	</div>
 
 	<a>表示したい画像を選んでください．</a>
 	<div class="input-area">
@@ -30,7 +32,6 @@
 	
 	<div class="preview">
 		<p>プレビュー</p>
-		<!-- JavaScriptで画像を表示 -->
 	</div>
 	
 	<div class="output-preview-area">
@@ -41,6 +42,8 @@
     	</c:if>
 	</div>
 	
+	<!-- 画像表示 -->
+	<script type="text/javascript" src="../js/common.js"></script>
 	<!-- フッター -->
 	<div>
 		<script src="../js/footer.js"></script>
