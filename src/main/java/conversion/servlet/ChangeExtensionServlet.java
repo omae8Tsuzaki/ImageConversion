@@ -16,8 +16,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
-import utils.ImageExtension;
-import utils.Sanitize;
+import common.enums.ImageExtension;
+import common.utils.Sanitize;
 
 /**
  * <p>画像の拡張子を変更するサーブレット。</p>
@@ -47,10 +47,10 @@ public class ChangeExtensionServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// パラメータを取得
 		Part filePart = request.getPart("imageFile");
-		String newExtension = request.getParameter("newExtension");
+		String newExtension = request.getParameter("extension");
 		// 入力確認
 		if (filePart == null || filePart.getSize() == 0) {
-			response.sendRedirect("/function/trimming.jsp");
+			response.sendRedirect("/function/changeExtension.jsp");
 			return;
 		}
 		
@@ -73,12 +73,14 @@ public class ChangeExtensionServlet extends HttpServlet {
 			}
 			
 			ByteArrayOutputStream baos = new ByteArrayOutputStream();
-			ImageIO.write(originalImage, "jpg", baos);
+			ImageIO.write(originalImage, newExtension, baos);
 			byte[] imageBytes = baos.toByteArray();
 			String base64Image = Base64.getEncoder().encodeToString(imageBytes);
 			
 			request.setAttribute("base64Image", base64Image);
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/function/trimming.jsp");
+			request.setAttribute("oldExtension", fileExtension);
+			request.setAttribute("newExtension", newExtension);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/function/changeExtension.jsp");
             dispatcher.forward(request, response);
 		}
 	}

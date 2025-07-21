@@ -2,7 +2,6 @@ package conversion.servlet;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -12,7 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import utils.ImageExtension;
+import conversion.logic.GetExtension;
+import conversion.logic.GetExtensionImpl;
 
 /**
  * <p>画像の拡張子を取得するサーブレット。</p>
@@ -30,35 +30,31 @@ public class GetExtensionServlet extends HttpServlet {
     }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * <p>拡張子一覧を取得してJSPに渡す（画面初期表示など）。</p>
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// ImageExtensionの値を取得してリストに変換
-	    List<String> extensions = List.of(ImageExtension.values())
-	                                  .stream()
-	                                  .map(ImageExtension::getExtension)
-	                                  .collect(Collectors.toList());
-	    // リクエスト属性に設定
-	    request.setAttribute("extensions", extensions);
-	    // JSPにフォワード
+		GetExtension logic = new GetExtensionImpl();
+		List<String> extensions = logic.getExtensionList();
+		
+		request.setAttribute("extensions", extensions);
+	    
+		// JSPにフォワード
 	    RequestDispatcher dispatcher = request.getRequestDispatcher("/function/changeExtension.jsp");
 	    dispatcher.forward(request, response);
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * <p>ユーザーが送信した拡張子文字列から ImageExtension を特定し、結果をJSPに返す。</p>
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// ImageExtensionの値を取得してリストに変換
-        List<String> extensions = List.of(ImageExtension.values())
-                                      .stream()
-                                      .map(ImageExtension::getExtension)
-                                      .collect(Collectors.toList());
-        // リクエスト属性に設定
-        request.setAttribute("extensions", extensions);
-        // JSPにフォワード
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/function/changeExtension.jsp");
-        dispatcher.forward(request, response);
+		GetExtension logic = new GetExtensionImpl();
+		List<String> extensions = logic.getExtensionList();
+		
+		request.setAttribute("extensions", extensions);
+	    
+		// JSPにフォワード
+	    RequestDispatcher dispatcher = request.getRequestDispatcher("/function/changeExtension.jsp");
+	    dispatcher.forward(request, response);
 	}
 
 }

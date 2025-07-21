@@ -1,20 +1,30 @@
-package utils;
+package common.utils;
 
 /**
  * <p>サニタイズ処理を行うユーティリティクラス。</p>
  */
 public class Sanitize {
 	
+	private Sanitize() {
+		// インスタンス化を防ぐためのコンストラクタ
+	}
+	
 	/**
 	 * <p>特殊文字をエスケープする．</p>
-	 * @param input 入力値
-	 * @return サニタイズした結果
+	 * 
+	 * @param input エスケープ対象の文字列
+	 * @return エスケープ後の文字列（nullは空文字として扱う）
 	 */
-	public static String sanitizeHtml(String input) {
-//		if() {
-//			
-//		}
-		return input.replaceAll("&","&amp;");
+	public static String escapeHtml(String input) {
+		if (input == null) {
+            return "";
+        }
+		return input
+	            .replace("&", "&amp;")
+	            .replace("<", "&lt;")
+	            .replace(">", "&gt;")
+	            .replace("\"", "&quot;")
+	            .replace("'", "&#39;");
 	}
 	
 	/**
@@ -37,6 +47,9 @@ public class Sanitize {
 	 * @return 拡張子（小文字）または空文字列
 	 */
 	public static String getFileExtension(String fileName) {
+		if (fileName == null) {
+			throw new IllegalArgumentException("File name cannot be null");
+		}
 	    int lastIndex = fileName.lastIndexOf('.');
 	    if (lastIndex > 0 && lastIndex < fileName.length() - 1) {
 	        return fileName.substring(lastIndex + 1).toLowerCase();

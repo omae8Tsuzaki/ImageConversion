@@ -1,4 +1,4 @@
-package logic;
+package sample.logic;
 
 /**
  * <p>計算処理を行うクラス。</p>

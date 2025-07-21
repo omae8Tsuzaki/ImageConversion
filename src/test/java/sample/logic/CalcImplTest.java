@@ -1,19 +1,20 @@
-package logic;
+package sample.logic;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
+
 /**
  * <p>{@link CalcImpl}のテストクラス。</p>
  * 
  * <ul>
- * <li>{@link #addSucces01}正常系：2つの整数を加算する</li>
+ * <li>{@link #addSuccess01}正常系：2つの整数を加算する</li>
  * </ul>
  */
 public class CalcImplTest {
 
 	@Test
-	public void addSucces01() {
+	public void addSuccess01() {
 		CalcImpl calc = new CalcImpl();
 		// 実行
 		int result = calc.add(1, 2);

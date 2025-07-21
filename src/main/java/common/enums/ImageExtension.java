@@ -1,4 +1,4 @@
-package utils;
+package common.enums;
 
 /**
  * <p>画像の拡張子を表す列挙型。</p>
