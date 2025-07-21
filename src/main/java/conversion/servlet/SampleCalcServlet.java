@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import logic.CalcImpl;
+import sample.logic.CalcImpl;
 
 /**
  * Servlet implementation class SampleCalcServlet

@@ -47,15 +47,16 @@ public class ChangeExtensionServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// パラメータを取得
 		Part filePart = request.getPart("imageFile");
-		String newExtension = request.getParameter("newExtension");
+		String newExtension = request.getParameter("extension");
 		// 入力確認
 		if (filePart == null || filePart.getSize() == 0) {
-			response.sendRedirect("/function/trimming.jsp");
+			response.sendRedirect("/function/changeExtension.jsp");
 			return;
 		}
 		
 		// 拡張子確認
 		String fileExtension = Sanitize.getFileExtension(filePart.getSubmittedFileName());
+		System.out.println("Selected file extension: " + fileExtension);
 		if(!ImageExtension.isValidExtension(fileExtension)) {
 			RequestDispatcher rd = request.getRequestDispatcher("/function/exceptionMessage.jsp");
 		    request.setAttribute("exception", "無効な拡張子です: " + fileExtension);
@@ -73,12 +74,14 @@ public class ChangeExtensionServlet extends HttpServlet {
 			}
 			
 			ByteArrayOutputStream baos = new ByteArrayOutputStream();
-			ImageIO.write(originalImage, "jpg", baos);
+			ImageIO.write(originalImage, newExtension, baos);
 			byte[] imageBytes = baos.toByteArray();
 			String base64Image = Base64.getEncoder().encodeToString(imageBytes);
 			
 			request.setAttribute("base64Image", base64Image);
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/function/trimming.jsp");
+			request.setAttribute("oldExtension", fileExtension);
+			request.setAttribute("newExtension", newExtension);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/function/changeExtension.jsp");
             dispatcher.forward(request, response);
 		}
 	}

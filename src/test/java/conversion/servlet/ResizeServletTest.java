@@ -21,9 +21,10 @@ import org.junit.jupiter.api.Test;
  * <p>{@link ResizeServlet}のテストクラス。</p>
  * 
  * <ul>
- * <li>{@link #doPostSucces01}正常系：画像ファイルが選択され、リサイズが成功した場合</li>
+ * <li>{@link #doPostSuccess01}正常系：画像ファイルが選択され、リサイズが成功した場合</li>
  * <li>{@link #doPostError01}異常系：画像ファイルが選択されていない場合</li>
  * <li>{@link #doPostError02}異常系：無効な画像データが送信された場合</li>
+ * <li>{@link #doPostError03}異常系：幅と高さが数値以外の入力の場合</li>
  * </ul>
  */
 public class ResizeServletTest {
@@ -55,7 +56,7 @@ public class ResizeServletTest {
      * @throws Exception 想定外のエラーが発生した場合
      */
 	@Test
-	public void doPostSucces01() throws Exception {
+	public void doPostSuccess01() throws Exception {
 		// モックの設定
 		when(request.getPart("imageFile")).thenReturn(imagePart);
 		when(request.getParameter("width")).thenReturn("100");
@@ -136,7 +137,7 @@ public class ResizeServletTest {
 		// モックの設定
 		when(request.getPart("imageFile")).thenReturn(imagePart);
 		when(request.getParameter("width")).thenReturn("abc"); // 数値以外の入力
-		when(request.getParameter("height")).thenReturn("100");
+		when(request.getParameter("height")).thenReturn("abc");
 
 		when(imagePart.getSize()).thenReturn(100L);
 		when(imagePart.getInputStream()).thenThrow(new IOException("Invalid image data"));

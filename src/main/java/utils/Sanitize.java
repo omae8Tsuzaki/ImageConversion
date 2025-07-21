@@ -7,6 +7,7 @@ public class Sanitize {
 	
 	/**
 	 * <p>特殊文字をエスケープする．</p>
+	 * 
 	 * @param input 入力値
 	 * @return サニタイズした結果
 	 */

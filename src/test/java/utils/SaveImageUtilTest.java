@@ -24,6 +24,11 @@ public class SaveImageUtilTest {
 	@TempDir
     File temporaryFolder;
 	
+	/**
+	 * <p>{@link SaveImageUtil#saveImage}の正常系テスト。</p>
+	 * 
+	 * @throws Exception 想定外のエラーが発生した場合
+	 */
 	@Test
 	public void saveImageSuccess01() throws Exception {
 		// モックのPartオブジェクトを作成

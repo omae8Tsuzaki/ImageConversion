@@ -19,13 +19,15 @@
 	<form action="${pageContext.request.contextPath}/function/resize" method="post" enctype="multipart/form-data">
 		<p>画像をアップロードしてください．</p>
 		<input type="file" id="file-input" name="imageFile" accept="image/*"><br>
-		<div class="preview">
-			<p>アップロードするファイルが選択されていません．</p>
-		</div>
 		<p>幅: <input type="number" name="width" required min="1"></p>
         <p>高さ: <input type="number" name="height" required min="1"></p>
 		<button type="submit">変換</button>
 	</form>
+	
+	<!-- アップロードした画像 -->
+	<div class="preview">
+		<p>アップロードするファイルが選択されていません．</p>
+	</div>
 	
 	<!-- サイズ変更後の画像 -->
 	<c:if test="${not empty base64Image}">
