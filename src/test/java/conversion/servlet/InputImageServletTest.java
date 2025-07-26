@@ -29,7 +29,7 @@ import org.junit.jupiter.api.Test;
  * </ul>
  */
 public class InputImageServletTest {
-	InputImageServlet servlet;
+	private InputImageServlet servlet;
 	
 	private HttpServletRequest request;
     private HttpServletResponse response;

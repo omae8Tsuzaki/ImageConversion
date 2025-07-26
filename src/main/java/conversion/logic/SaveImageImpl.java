@@ -1,36 +1,49 @@
-package common.utils;
+package conversion.logic;
 
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
-import java.util.Base64;
 
 import javax.imageio.ImageIO;
 import javax.servlet.http.Part;
 
+import common.utils.Sanitize;
+
 /**
  * <p>画像を保存するメソッドを用意したユーティリティクラス。</p>
  */
-public class SaveImageUtil {
+public class SaveImageImpl implements SaveImage {
 	
+
 	/**
-	 * <p>画像をBase64エンコードして保存する。</p>
-	 * 
-	 * @param imageBytes 画像のバイト配列
-	 * @param formatName 画像のフォーマット名（例: "png", "jpg"）
-	 * @return Base64エンコードされた画像データ
+	 * <p>
 	 */
-	public static String saveImage(byte[] imageBytes, String formatName) {
+	@Override
+	public String saveImage(byte[] imageBytes, String outputDir, String outputFileName) throws Exception {
 		try {
+			// バイト配列から画像を復元
 			BufferedImage image = ImageIO.read(new ByteArrayInputStream(imageBytes));
-			ByteArrayOutputStream baos = new ByteArrayOutputStream();
-			ImageIO.write(image, formatName, baos);
-			return Base64.getEncoder().encodeToString(baos.toByteArray());
+			if (image == null) {
+	            throw new IOException("画像として読み込めませんでした。");
+	        }
+			
+			// 保存先ディレクトリを確認・作成
+	        File dir = new File(outputDir);
+	        if (!dir.exists()) {
+	            dir.mkdirs();
+	        }
+	        
+	        // 拡張子取り出し
+	        String extension = Sanitize.getFileExtension(outputFileName);
+	        
+	        File outputFile = new File(dir, outputFileName);
+
+			ImageIO.write(image, extension, outputFile);
+			return outputFile.getAbsolutePath();
 		} catch (IOException e) {
-			e.printStackTrace();
-			return null;
+			// TODO 適切なエラーを送出するように修正の必要あり。
+			throw new Exception();
 		}
 	}
 	
@@ -42,7 +55,8 @@ public class SaveImageUtil {
 	 * @return 保存されたファイルの名前
 	 * @throws IOException 画像の保存に失敗した場合
 	 */
-	public static String saveImage(Part part, String uploadDir) throws IOException {
+	@Override
+	public String savePartImage(Part part, String uploadDir) throws IOException {
 		if (part == null || part.getSubmittedFileName() == null) {
             throw new IllegalArgumentException("無効なファイルです。");
         }

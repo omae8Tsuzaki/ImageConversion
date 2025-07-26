@@ -1,4 +1,4 @@
-package common.utils;
+package conversion.logic;
 
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -12,25 +12,49 @@ import javax.servlet.http.Part;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
+
 /**
- * <p>{@link SaveImageUtil}のテストクラス。</p>
+ * <p>{@link SaveImageImpl}のテストクラス。</p>
  * 
+ * <h4>saveImageメソッド</h4>
  * <ul>
- * <li>{@link #saveImageSuccess01}正常系</li>
+ * </ul>
+ * 
+ * <h4>savePartImage メソッド</p>
+ * <ul>
+ * <li>{@link #savePartImageSuccess01}正常系</li>
  * </ul>
  */
-public class SaveImageUtilTest {
+public class SaveImageImplTest {
 	// テスト用
 	@TempDir
-    File temporaryFolder;
+    private File temporaryFolder;
+	
+	private SaveImage logic = new SaveImageImpl();
+	
+	@Test
+	public void saveImageSuccess01() throws Exception {
+
+		String outputFileName = "test.jpg";
+		byte[] imageBytes = null;
+
+		//
+		// 実行
+		//
+		String result = logic.saveImage(imageBytes, temporaryFolder.getAbsolutePath(), outputFileName);
+		
+		//
+		// 検証
+		//
+	}
 	
 	/**
-	 * <p>{@link SaveImageUtil#saveImage}の正常系テスト。</p>
+	 * <p>正常系テスト。</p>
 	 * 
 	 * @throws Exception 想定外のエラーが発生した場合
 	 */
 	@Test
-	public void saveImageSuccess01() throws Exception {
+	public void savePartImageSuccess01() throws Exception {
 		// モックのPartオブジェクトを作成
 		Part mockPart = mock(Part.class);
 		String fileName = "test_image.jpg";
@@ -38,10 +62,14 @@ public class SaveImageUtilTest {
 		// JPEGヘッダー
 	    when(mockPart.getInputStream()).thenReturn(new ByteArrayInputStream(new byte[]{(byte) 0xFF, (byte) 0xD8, (byte) 0xFF}));
 		
+	    //
 		// 実行
-		String testImage = SaveImageUtil.saveImage(mockPart, temporaryFolder.getAbsolutePath());
+	    //
+		String testImage = logic.savePartImage(mockPart, temporaryFolder.getAbsolutePath());
 		
+		//
 		// 検証
+		//
 		assertEquals(fileName, testImage);
 	}
 	

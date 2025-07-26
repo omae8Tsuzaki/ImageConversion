@@ -5,6 +5,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Base64;
+import java.util.List;
 
 import javax.imageio.ImageIO;
 import javax.servlet.RequestDispatcher;
@@ -18,6 +19,8 @@ import javax.servlet.http.Part;
 
 import common.enums.ImageExtension;
 import common.utils.Sanitize;
+import conversion.logic.GetExtension;
+import conversion.logic.GetExtensionImpl;
 
 /**
  * <p>画像の拡張子を変更するサーブレット。</p>
@@ -63,6 +66,10 @@ public class ChangeExtensionServlet extends HttpServlet {
 		    return;
 		}
 		
+		// 拡張子一覧を取得
+		GetExtension logic = new GetExtensionImpl();
+		List<String> extensions = logic.getExtensionList();
+		
 		try(InputStream inputStream = filePart.getInputStream()) {
 			BufferedImage originalImage = ImageIO.read(inputStream);
 			if (originalImage == null) {
@@ -80,6 +87,7 @@ public class ChangeExtensionServlet extends HttpServlet {
 			request.setAttribute("base64Image", base64Image);
 			request.setAttribute("oldExtension", fileExtension);
 			request.setAttribute("newExtension", newExtension);
+			request.setAttribute("extensions", extensions);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/function/changeExtension.jsp");
             dispatcher.forward(request, response);
 		}

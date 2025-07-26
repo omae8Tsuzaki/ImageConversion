@@ -38,10 +38,10 @@
 	<c:if test="${not empty base64Image}">
         <h3>拡張子を変更した画像</h3>
         <h5>変更前の拡張子：${oldExtension}→変更後の拡張子：${newExtension}</h5>
-        <a><img src="data:image/jpeg;base64,${base64Image}" alt="拡張子を変更した画像"/></a>
+        <img src="data:image/jpeg;base64,${base64Image}" alt="拡張子を変更した画像"/>
     </c:if>
 
-    <!-- サイズ変更後の画像<!-- 画像表示 -->
+    <!-- 画像表示 -->
 	<script type="text/javascript" src="../js/common.js"></script>
 	<!-- フッター -->
 	<div>
