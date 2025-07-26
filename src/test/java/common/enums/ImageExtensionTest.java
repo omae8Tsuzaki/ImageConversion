@@ -1,4 +1,4 @@
-package utils;
+package common.enums;
 
 import static org.junit.jupiter.api.Assertions.*;
 

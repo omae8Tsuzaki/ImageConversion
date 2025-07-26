@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import utils.ImageExtension;
+import common.enums.ImageExtension;
 
 /**
  * <p>画像の拡張子を取得するロジックの実装クラス。</p>

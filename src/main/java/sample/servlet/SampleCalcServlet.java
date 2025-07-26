@@ -1,4 +1,4 @@
-package conversion.servlet;
+package sample.servlet;
 
 import java.io.IOException;
 
@@ -38,7 +38,7 @@ public class SampleCalcServlet extends HttpServlet {
 			num2 = Integer.parseInt(num2Str);
 		} catch (NumberFormatException e) {
 			// 数値変換に失敗した場合はエラーメッセージを設定
-			request.setAttribute("error", "数値を入力してください");
+			request.setAttribute("exception", "数値を入力してください");
 			request.getRequestDispatcher("/function/exceptionMessage.jsp").forward(request, response);
 			return;
 		}

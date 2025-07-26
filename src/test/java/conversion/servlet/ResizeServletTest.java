@@ -20,6 +20,7 @@ import org.junit.jupiter.api.Test;
 /**
  * <p>{@link ResizeServlet}のテストクラス。</p>
  * 
+ * <h4>doPost メソッド</h4>
  * <ul>
  * <li>{@link #doPostSuccess01}正常系：画像ファイルが選択され、リサイズが成功した場合</li>
  * <li>{@link #doPostError01}異常系：画像ファイルが選択されていない場合</li>

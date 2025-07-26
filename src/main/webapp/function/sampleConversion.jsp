@@ -5,14 +5,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>画像変換アプリサンプル</title>
+<title>画像表示サンプル</title>
 <link rel="stylesheet" type="text/css" href="../css/design.css">
 </head>
 <body>
 	<!-- ヘッダー -->
 	<div>
 		<script src="../js/header.js"></script>
-		<h1>画像変換アプリ</h1>
+		<h1>画像表示サンプル</h1>
 		<a href="../home/Menu.html">戻る</a>
 	</div>
 
@@ -26,7 +26,7 @@
 				</label>
 				<input type="file" name="imageFile" id="file-input" accept="image/*" style="display: none;">
 			</div>
-			<button type="submit">変換</button>
+			<!-- <button type="submit">変換</button> -->
 		</form>
 	</div>
 	

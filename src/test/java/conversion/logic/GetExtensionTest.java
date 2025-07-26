@@ -6,7 +6,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import utils.ImageExtension;
+import common.enums.ImageExtension;
 
 /**
  * <p>{@link GetExtension}のテストクラス。</p>

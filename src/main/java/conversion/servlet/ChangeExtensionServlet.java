@@ -16,8 +16,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
-import utils.ImageExtension;
-import utils.Sanitize;
+import common.enums.ImageExtension;
+import common.utils.Sanitize;
 
 /**
  * <p>画像の拡張子を変更するサーブレット。</p>
@@ -56,7 +56,6 @@ public class ChangeExtensionServlet extends HttpServlet {
 		
 		// 拡張子確認
 		String fileExtension = Sanitize.getFileExtension(filePart.getSubmittedFileName());
-		System.out.println("Selected file extension: " + fileExtension);
 		if(!ImageExtension.isValidExtension(fileExtension)) {
 			RequestDispatcher rd = request.getRequestDispatcher("/function/exceptionMessage.jsp");
 		    request.setAttribute("exception", "無効な拡張子です: " + fileExtension);

@@ -2,7 +2,7 @@ package conversion.logic;
 
 import java.util.List;
 
-import utils.ImageExtension;
+import common.enums.ImageExtension;
 
 /**
  * <p>画像の拡張子を取得するロジックのインターフェース。</p>
