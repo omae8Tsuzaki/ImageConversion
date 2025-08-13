@@ -84,10 +84,19 @@ public class ChangeExtensionServlet extends HttpServlet {
 			byte[] imageBytes = baos.toByteArray();
 			String base64Image = Base64.getEncoder().encodeToString(imageBytes);
 			
+			// 新しいファイルの名前
+			String fileName = filePart.getSubmittedFileName();
+			if (fileName.lastIndexOf('.') != -1) {
+				fileName = fileName.substring(0, fileName.lastIndexOf('.')) + "." + newExtension;
+			} else {
+				fileName += "." + newExtension;
+			}
+			
 			request.setAttribute("base64Image", base64Image);
 			request.setAttribute("oldExtension", fileExtension);
 			request.setAttribute("newExtension", newExtension);
 			request.setAttribute("extensions", extensions);
+			request.setAttribute("fileName", fileName);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/function/changeExtension.jsp");
             dispatcher.forward(request, response);
 		}

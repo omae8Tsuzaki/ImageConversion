@@ -4,6 +4,8 @@ import java.io.IOException;
 
 import javax.servlet.http.Part;
 
+import common.exception.LogicException;
+
 /**
  * <p>画像を保存するロジックのインターフェース。</p>
  */
@@ -18,7 +20,7 @@ public interface SaveImage {
 	 * @return 保存された画像のパス
 	 * @throws Exception 想定外のエラーが発生した場合
 	 */
-	public String saveImage(byte[] imageBytes, String outputDir, String outputFileName) throws Exception;
+	public String saveImage(byte[] imageBytes, String outputDir, String outputFileName) throws LogicException;
 	
 
 	/**
@@ -29,5 +31,5 @@ public interface SaveImage {
 	 * @return 保存された画像のパス
 	 * @throws IOException 入出力エラーが発生した場合
 	 */
-	public String savePartImage(Part part, String uploadDir) throws IOException;
+	public String savePartImage(Part part, String uploadDir) throws LogicException;
 }

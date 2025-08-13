@@ -19,6 +19,7 @@
 	<form action="${pageContext.request.contextPath}/function/changeExtension" method="post" enctype="multipart/form-data">
 		<p>画像をアップロードしてください．</p>
 		<input type="file" id="file-input" name="imageFile" accept="image/*"><br>
+		<input type="hidden" name="backUrl" value="${pageContext.request.requestURL}">
 
 		<select name="extension" size="1">
 	        <c:forEach var="extension" items="${extensions}">
@@ -39,6 +40,15 @@
         <h3>拡張子を変更した画像</h3>
         <h5>変更前の拡張子：${oldExtension}→変更後の拡張子：${newExtension}</h5>
         <img src="data:image/jpeg;base64,${base64Image}" alt="拡張子を変更した画像"/>
+        
+        <form action="${pageContext.request.contextPath}/function/saveImage" method="post" enctype="multipart/form-data">
+            <!-- <input type="hidden" name="base64Image" value="${base64Image}"/>  -->
+			<input type="hidden" name="base64Image" value="<c:out value='${base64Image}' escapeXml='false'/>" />
+            <input type="hidden" name="extension" value="${newExtension}"/>
+            <input type="hidden" name="fileName" value="${fileName}"/>
+            <input type="hidden" name="backUrl" value="${pageContext.request.requestURL}"/>
+            <button type="submit">画像を保存</button>
+        </form>
     </c:if>
 
     <!-- 画像表示 -->
