@@ -77,7 +77,6 @@ public class SaveImageServlet extends HttpServlet {
 			return;
 		}
 		
-		System.out.println("保存先パス: " + saveImagePath);
 		request.setAttribute("saveImagePath", saveImagePath);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/function/saveSuccess.jsp");
 		dispatcher.forward(request, response);
