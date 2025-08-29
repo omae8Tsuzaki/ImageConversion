@@ -19,9 +19,9 @@ import common.exception.LogicException;
 
 
 /**
- * <p>{@link SaveImageImpl}のテストクラス。</p>
+ * <p>{@link SaveImageImpl} のテストクラス。</p>
  * 
- * <h4>saveImageメソッド</h4>
+ * <h4>saveImage メソッド</h4>
  * <ul>
  * <li>{@link #saveImageSuccess01}正常系：画像を指定されたディレクトリに保存する</li>
  * <li>{@link #saveImageSuccess02}正常系：出力先ディレクトリが存在しない場合、ディレクトリを作成する</li>

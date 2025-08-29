@@ -24,7 +24,7 @@ public class SaveImageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	// 保存先のディレクトリパス
-	private static final String DIR_PATH = "C:/Download/";
+	private String dirPath = "C:/Download/";
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -70,17 +70,25 @@ public class SaveImageServlet extends HttpServlet {
 		SaveImage saveImageLogic = new SaveImageImpl();
 		try {
 			// 指定したディレクトリに画像を保存
-			saveImagePath = saveImageLogic.saveImage(imageBytes, DIR_PATH, fileName);
+			saveImagePath = saveImageLogic.saveImage(imageBytes, dirPath, fileName);
 		} catch (LogicException e) {
 			request.setAttribute("exception", e);
 			request.getRequestDispatcher("/function/exceptionMessage.jsp").forward(request, response);
 			return;
 		}
 		
-		System.out.println("保存先パス: " + saveImagePath);
 		request.setAttribute("saveImagePath", saveImagePath);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/function/saveSuccess.jsp");
 		dispatcher.forward(request, response);
+	}
+	
+	/**
+	 * <p>保存先のディレクトリパスを設定する（テスト用）。</p>
+	 * 
+	 * @param dirPath 保存先のディレクトリパス
+	 */
+	public void setDirPath(String dirPath) {
+		this.dirPath = dirPath;
 	}
 
 }

@@ -38,7 +38,7 @@ public class TrimmingServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		response.sendRedirect("/function/trimming.jsp");
+		response.setContentType("application/octet-stream");
 	}
 
 	/**
