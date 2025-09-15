@@ -13,7 +13,7 @@
 	<div>
 		<script src="../js/header.js"></script>
 		<h1>画像表示サンプル</h1>
-		<a href="../home/Menu.html">戻る</a>
+		<a href="../home/Menu.html" class="radius-button">戻る</a>
 	</div>
 
 	<a>表示したい画像を選んでください．</a>

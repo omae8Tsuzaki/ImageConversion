@@ -12,7 +12,7 @@
 	<div>
 		<script src="../js/header.js"></script>
 		<h1 style="text-align: center;">画像の保存に成功しました。</h1>
-		<a href="../home/Menu.html">戻る</a>
+		<a href="../home/Menu.html" class="radius-button">戻る</a>
 	</div>
 	
 	<!-- フッター -->

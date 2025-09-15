@@ -16,22 +16,45 @@
 #input-image {
 	width: 150px; 
 	height: 100px;
-	border : solid;
-	background-color: white;
 	border: solid;
+	background-color: white;
 }
 .container {
 	display: flex;
 }
 
+/*ボタンの設定*/
+.radius-button {
+	display: inline-block;
+	padding: 7px 20px;
+	border-radius: 25px;
+	text-decoration: none;
+	color: #FFF;
+	background-image: linear-gradient(45deg, #FFC107 0%, #ff8b5f 100%);
+	transition: .4s;
+}
+
 .box {
 	margin: 5px;
-	widows: 100px;
+	width: 100px;
 	height: 100px;
 	background-color: #FFFFDD;
 	border: solid;
-	/*div要素全体にリンクをつけるために必要な要素*/
-	/*position: relative;*/
+	position: relative;
+}
+
+/*divタグ内のリンクを全体に広げる*/
+.box a {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+
+.box:hover{
+  opacity: 0.7;
+  transition: 0.5s;
 }
 
 .preview img {
