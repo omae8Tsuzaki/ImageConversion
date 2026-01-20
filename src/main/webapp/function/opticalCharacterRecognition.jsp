@@ -13,7 +13,7 @@
 	<div>
 		<script src="../js/header.js"></script>
 		<h1 style="text-align: center;">OCR</h1>
-		<a href="../home/Menu.html" class="radius-button">←戻る</a>
+		<a href="../home/Menu.html" class="radius-button">戻る</a>
 	</div>
 	
 	<!-- OCR Servlet 動かない -->
