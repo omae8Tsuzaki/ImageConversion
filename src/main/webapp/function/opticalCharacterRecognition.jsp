@@ -4,17 +4,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+<jsp:include page="/common/head.jsp" />
 <title>OCR</title>
-<link rel="stylesheet" type="text/css" href="../css/design.css">
 </head>
 <body>
 	<!-- ヘッダー -->
-	<div>
-		<script src="../js/header.js"></script>
-		<h1 style="text-align: center;">OCR</h1>
-		<a href="../home/Menu.html" class="radius-button">戻る</a>
-	</div>
+	<c:set var="pageTitle" value="OCR" scope="request" />
+	<jsp:include page="/common/header.jsp" />
 	
 	<!-- OCR Servlet 動かない -->
 	
@@ -32,8 +28,6 @@
     </c:if>
 	
 	<!-- フッター -->
-	<div>
-		<script src="../js/footer.js"></script>
-	</div>
+	<jsp:include page="/common/footer.jsp" />
 </body>
 </html>

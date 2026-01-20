@@ -7,16 +7,13 @@
 <%@page import="java.io.PrintWriter"%><html>
 
 <head>
-<meta charset="UTF-8">
+<jsp:include page="/common/head.jsp" />
 <title>例外ページ</title>
-<link rel="stylesheet" type="text/css" href="../css/design.css">
 </head>
 <body>
 	<!-- ヘッダー -->
-	<div>
-		<script src="../js/header.js"></script>
-		<h1>例外のprintStackTrace</h1>
-	</div>
+	<c:set var="pageTitle" value="例外のprintStackTrace" scope="request" />
+	<jsp:include page="/common/header.jsp" />
 
     <pre>
     	<%
@@ -31,8 +28,6 @@
     </pre>
     
     <!-- フッター -->
-    <div>
-		<script src="../js/footer.js"></script>
-	</div>
+    <jsp:include page="/common/footer.jsp" />
 </body>
 </html>

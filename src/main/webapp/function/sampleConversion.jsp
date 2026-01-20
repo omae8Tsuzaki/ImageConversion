@@ -4,17 +4,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+<jsp:include page="/common/head.jsp" />
 <title>画像表示サンプル</title>
-<link rel="stylesheet" type="text/css" href="../css/design.css">
 </head>
 <body>
 	<!-- ヘッダー -->
-	<div>
-		<script src="../js/header.js"></script>
-		<h1>画像表示サンプル</h1>
-		<a href="../home/Menu.html" class="radius-button">戻る</a>
-	</div>
+	<c:set var="pageTitle" value="画像表示サンプル" scope="request" />
+	<jsp:include page="/common/header.jsp" />
 
 	<a>表示したい画像を選んでください．</a>
 	<div class="input-area">
@@ -39,9 +35,7 @@
 	<!-- 画像表示 -->
 	<script type="text/javascript" src="../js/common.js"></script>
 	<!-- フッター -->
-	<div>
-		<script src="../js/footer.js"></script>
-	</div>
+	<jsp:include page="/common/footer.jsp" />
 </body>
 <script type="text/javascript" src="../js/common.js"></script>
 </html>

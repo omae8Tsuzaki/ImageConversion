@@ -3,17 +3,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+<jsp:include page="/common/head.jsp" />
 <title>サンプル一覧</title>
-<link rel="stylesheet" type="text/css" href="../css/design.css">
 </head>
 <body>
 	<!-- ヘッダー -->
-	<div>
-		<script src="../js/header.js"></script>
-		<h1 style="text-align: center;">サンプル一覧</h1>
-		<a href="../home/Menu.html" class="radius-button">戻る</a>
-	</div>
+	<c:set var="pageTitle" value="サンプル一覧" scope="request" />
+	<jsp:include page="/common/header.jsp" />
 	
 	<div class="container">
 		<div class="box">
@@ -28,8 +24,6 @@
 	</div>
 
 	<!-- フッター -->
-	<div>
-		<script src="../js/footer.js"></script>
-	</div>
+	<jsp:include page="/common/footer.jsp" />
 </body>
 </html>

@@ -4,17 +4,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+<jsp:include page="/common/head.jsp" />
 <title>サンプル計算用</title>
-<link rel="stylesheet" type="text/css" href="../css/design.css">
 </head>
 <body>
 	<!-- ヘッダー -->
-	<div>
-		<script src="../js/header.js"></script>
-		<h1 style="text-align: center;">サンプル計算用</h1>
-		<a href="../home/Menu.html" class="radius-button">戻る</a>
-	</div>
+	<c:set var="pageTitle" value="サンプル計算用" scope="request" />
+	<jsp:include page="/common/header.jsp" />
 	
 	<form action="${pageContext.request.contextPath}/function/sampleCalc" method="get">
 		<h2>足し算フォーム</h2>
@@ -27,8 +23,6 @@
 	<c:out value="${result}" default="未入力"></c:out>
 	
 	<!-- フッター -->
-	<div>
-		<script src="../js/footer.js"></script>
-	</div>
+	<jsp:include page="/common/footer.jsp" />
 </body>
 </html>

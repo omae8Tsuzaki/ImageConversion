@@ -3,17 +3,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+<jsp:include page="/common/head.jsp" />
 <title>トリミング</title>
-<link rel="stylesheet" type="text/css" href="../css/design.css">
 </head>
 <body>
 	<!-- ヘッダー -->
-	<div>
-		<script src="../js/header.js"></script>
-		<h1 style="text-align: center;">トリミング</h1>
-		<a href="../home/Menu.html" class="radius-button">戻る</a>
-	</div>
+	<c:set var="pageTitle" value="トリミング" scope="request" />
+	<jsp:include page="/common/header.jsp" />
 	
 	<form action="${pageContext.request.contextPath}/function/trimming" method="post" enctype="multipart/form-data">
 		<p>画像をアップロードしてください．</p>
@@ -40,8 +36,6 @@
     <!-- 画像表示 -->
 	<script type="text/javascript" src="../js/common.js"></script>
 	<!-- フッター -->
-	<div>
-		<script src="../js/footer.js"></script>
-	</div>
+	<jsp:include page="/common/footer.jsp" />
 </body>
 </html>

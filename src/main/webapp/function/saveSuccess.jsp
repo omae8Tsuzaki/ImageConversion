@@ -4,16 +4,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+<jsp:include page="/common/head.jsp" />
 <title>画像の保存に成功しました。</title>
-<link rel="stylesheet" type="text/css" href="../css/design.css">
 </head>
 <body>
 	<!-- ヘッダー -->
-	<div>
-		<script src="../js/header.js"></script>
-		<h1 style="text-align: center;">画像の保存に成功しました。</h1>
-	</div>
+	<c:set var="pageTitle" value="画像の保存に成功しました。" scope="request" />
+	<jsp:include page="/common/header.jsp" />
 	
 	<div>
 		<c:if test="${not empty saveImagePath}">
@@ -23,8 +20,6 @@
 	</div>
 	
 	<!-- フッター -->
-	<div>
-		<script src="../js/footer.js"></script>
-	</div>
+	<jsp:include page="/common/footer.jsp" />
 </body>
 </html>
