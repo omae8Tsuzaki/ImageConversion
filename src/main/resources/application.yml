@@ -1,0 +1,19 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /ImageConversion
+spring:
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+  # jsp設定の追加
+  #mvc:
+    #view:
+      #prefix: /WEB-INF/
+      #suffix: .jsp
+app:
+  upload:
+    dir: C:/Download/
+  temp:
+    dir: ${java.io.tmpdir}/imageconversion
