@@ -18,6 +18,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Part;
 
 import com.imageconversion.common.exception.LogicException;
+import com.imageconversion.common.utils.FileValidator;
 import com.imageconversion.conversion.logic.OpticalCharacterRecognition;
 import com.imageconversion.conversion.logic.OpticalCharacterRecognitionImpl;
 
@@ -53,7 +54,7 @@ public class OpticalCharacterRecognitionServlet extends HttpServlet {
 		Part filePart = request.getPart("imageFile");
 		String language = "jpn";// 日本語固定
 		// 入力確認
-		if (filePart == null || filePart.getSize() == 0) {
+		if (FileValidator.isEmptyFilePart(filePart)) {
 			response.sendRedirect("/function/opticalCharacterRecognition.jsp");
 			return;
 		}

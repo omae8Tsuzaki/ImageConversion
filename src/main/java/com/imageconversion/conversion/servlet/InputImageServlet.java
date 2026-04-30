@@ -3,18 +3,18 @@ package com.imageconversion.conversion.servlet;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.Base64;
 
 import javax.imageio.ImageIO;
 
-import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Part;
+
+import com.imageconversion.common.utils.FileValidator;
 
 /**
  * <p>画像の入力を行うサーブレット。</p>
@@ -35,21 +35,15 @@ public class InputImageServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+
 		Part filePart = request.getPart("imageFile");
-		if (filePart == null || filePart.getSize() == 0) {
+		if (FileValidator.isEmptyFilePart(filePart)) {
 			response.sendRedirect("/function/sampleConversion.jsp");
 			return;
 		}
 
-		try (InputStream inputStream = filePart.getInputStream()) {
-			BufferedImage originalImage = ImageIO.read(inputStream);
-			if (originalImage == null) {
-				RequestDispatcher rd = request.getRequestDispatcher("/function/exceptionMessage.jsp");
-				request.setAttribute("exception", "無効な画像ファイルです");
-				rd.forward(request, response);
-				return;
-			}
+		try {
+			BufferedImage originalImage = FileValidator.readImage(filePart);
 
 			ByteArrayOutputStream baos = new ByteArrayOutputStream();
 			ImageIO.write(originalImage, "jpg", baos);
@@ -57,8 +51,10 @@ public class InputImageServlet extends HttpServlet {
 			String base64Image = Base64.getEncoder().encodeToString(imageBytes);
 
 			request.setAttribute("base64Image", base64Image);
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/function/sampleConversion.jsp");
-			dispatcher.forward(request, response);
+			request.getRequestDispatcher("/function/sampleConversion.jsp").forward(request, response);
+		} catch (IOException e) {
+			request.setAttribute("exception", e.getMessage());
+			request.getRequestDispatcher("/function/exceptionMessage.jsp").forward(request, response);
 		}
 	}
 

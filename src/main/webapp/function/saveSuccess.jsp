@@ -16,7 +16,7 @@
 		<c:if test="${not empty saveImagePath}">
 			<p>保存されたファイル名: ${saveImagePath}</p>
 		</c:if>
-		<a href="../home/Menu.html">ホーム</a>に戻る。
+		<a href="${pageContext.request.contextPath}/home/Menu.html">ホーム</a>に戻る。
 	</div>
 	
 	<!-- フッター -->

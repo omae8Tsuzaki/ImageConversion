@@ -3,13 +3,11 @@ package com.imageconversion.conversion.servlet;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.Base64;
 import java.util.List;
 
 import javax.imageio.ImageIO;
 
-import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.http.HttpServlet;
@@ -18,6 +16,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Part;
 
 import com.imageconversion.common.enums.ImageExtension;
+import com.imageconversion.common.utils.FileValidator;
 import com.imageconversion.common.utils.Sanitize;
 import com.imageconversion.conversion.logic.GetExtension;
 import com.imageconversion.conversion.logic.GetExtensionImpl;
@@ -28,7 +27,7 @@ import com.imageconversion.conversion.logic.GetExtensionImpl;
 @MultipartConfig
 public class ChangeExtensionServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -51,38 +50,31 @@ public class ChangeExtensionServlet extends HttpServlet {
 		Part filePart = request.getPart("imageFile");
 		String newExtension = request.getParameter("extension");
 		// 入力確認
-		if (filePart == null || filePart.getSize() == 0) {
+		if (FileValidator.isEmptyFilePart(filePart)) {
 			response.sendRedirect("/function/changeExtension.jsp");
 			return;
 		}
-		
+
 		// 拡張子確認
 		String fileExtension = Sanitize.getFileExtension(filePart.getSubmittedFileName());
-		if(!ImageExtension.isValidExtension(fileExtension)) {
-			RequestDispatcher rd = request.getRequestDispatcher("/function/exceptionMessage.jsp");
-		    request.setAttribute("exception", "無効な拡張子です: " + fileExtension);
-		    rd.forward(request, response);
-		    return;
+		if (!ImageExtension.isValidExtension(fileExtension)) {
+			request.setAttribute("exception", "無効な拡張子です: " + fileExtension);
+			request.getRequestDispatcher("/function/exceptionMessage.jsp").forward(request, response);
+			return;
 		}
-		
+
 		// 拡張子一覧を取得
 		GetExtension logic = new GetExtensionImpl();
 		List<String> extensions = logic.getExtensionList();
-		
-		try(InputStream inputStream = filePart.getInputStream()) {
-			BufferedImage originalImage = ImageIO.read(inputStream);
-			if (originalImage == null) {
-				RequestDispatcher rd = request.getRequestDispatcher("/function/exceptionMessage.jsp");
-				request.setAttribute("exception", "無効な画像ファイルです");
-				rd.forward(request, response);
-				return;
-			}
-			
+
+		try {
+			BufferedImage originalImage = FileValidator.readImage(filePart);
+
 			ByteArrayOutputStream baos = new ByteArrayOutputStream();
 			ImageIO.write(originalImage, newExtension, baos);
 			byte[] imageBytes = baos.toByteArray();
 			String base64Image = Base64.getEncoder().encodeToString(imageBytes);
-			
+
 			// 新しいファイルの名前
 			String fileName = filePart.getSubmittedFileName();
 			if (fileName.lastIndexOf('.') != -1) {
@@ -90,14 +82,16 @@ public class ChangeExtensionServlet extends HttpServlet {
 			} else {
 				fileName += "." + newExtension;
 			}
-			
+
 			request.setAttribute("base64Image", base64Image);
 			request.setAttribute("oldExtension", fileExtension);
 			request.setAttribute("newExtension", newExtension);
 			request.setAttribute("extensions", extensions);
 			request.setAttribute("fileName", fileName);
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/function/changeExtension.jsp");
-            dispatcher.forward(request, response);
+			request.getRequestDispatcher("/function/changeExtension.jsp").forward(request, response);
+		} catch (IOException e) {
+			request.setAttribute("exception", e.getMessage());
+			request.getRequestDispatcher("/function/exceptionMessage.jsp").forward(request, response);
 		}
 	}
 

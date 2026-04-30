@@ -31,7 +31,7 @@
     </c:if>
 	
 	<!-- 画像の表示 -->
-	<script type="text/javascript" src="../js/common.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/js/common.js"></script>
 	<!-- フッター -->
 	<jsp:include page="/common/footer.jsp" />
 </body>

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,13 +14,13 @@
 	
 	<div class="container">
 		<div class="box">
-			<a href="../function/sampleCalc.jsp">計算サンプル</a>
+			<a href="${pageContext.request.contextPath}/function/sampleCalc.jsp">計算サンプル</a>
 		</div>
 		<div class="box">
-			<a href="../function/sampleConversion.jsp">画像表示サンプル</a>
+			<a href="${pageContext.request.contextPath}/function/sampleConversion.jsp">画像表示サンプル</a>
 		</div>
 		<div class="box">
-			<a href="../function/exceptionMessage.jsp">例外ページ</a>
+			<a href="${pageContext.request.contextPath}/function/exceptionMessage.jsp">例外ページ</a>
 		</div>
 	</div>
 
