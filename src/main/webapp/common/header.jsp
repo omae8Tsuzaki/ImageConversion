@@ -5,5 +5,5 @@
 		<li class="menu-bar"><a href="${pageContext.request.contextPath}/home/ChangeHistory.html" class="menu-bar">変更履歴</a></li>
 	</ul>
 </nav>
-<h1 style="text-align: center;">${pageTitle}</h1>
+<h1 class="page-title">${pageTitle}</h1>
 <a href="${pageContext.request.contextPath}/home/Menu.html" class="radius-button">戻る</a>

@@ -3,7 +3,9 @@
  */
 document.write(
 	`
-	<a href="../home/ChangeHistory.html">変更履歴</a>
-	<p style="text-align: center;">©omae8Tsuzaki</p>
+	<div class="site-footer">
+		<a href="../home/ChangeHistory.html">変更履歴</a>
+		<p>©omae8Tsuzaki</p>
+	</div>
 	`
 );
