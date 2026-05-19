@@ -6,6 +6,7 @@ import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import com.imageconversion.ApplicationConfig;
 import com.imageconversion.conversion.servlet.ChangeExtensionServlet;
 import com.imageconversion.conversion.servlet.GetExtensionServlet;
 import com.imageconversion.conversion.servlet.InputImageServlet;
@@ -76,9 +77,10 @@ public class ServletConfig {
     }
 
     @Bean
-    public ServletRegistrationBean<SaveImageServlet> saveImageServlet(MultipartConfigElement multipartConfigElement) {
+    public ServletRegistrationBean<SaveImageServlet> saveImageServlet(MultipartConfigElement multipartConfigElement,
+    		ApplicationConfig applicationConfig) {
     	ServletRegistrationBean<SaveImageServlet> registration = 
-    			new ServletRegistrationBean<>(new SaveImageServlet(), "/function/saveImage");
+    			new ServletRegistrationBean<>(new SaveImageServlet(applicationConfig.getUploadDir()), "/function/saveImage");
     	
     	registration.setMultipartConfig(multipartConfigElement);
         return registration;

@@ -22,13 +22,23 @@ public class SaveImageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	// 保存先のディレクトリパス
-	private String dirPath = "C:/Download/";
+	private String dirPath;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
     public SaveImageServlet() {
         super();
+    }
+    
+    /**
+     * <p>保存先のディレクトリパスを指定してインスタンスを生成する。</p>
+     * 
+     * @param dirPath 保存先のディレクトリパス
+     */
+    public SaveImageServlet(String dirPath) {
+    	super();
+    	this.dirPath = dirPath;
     }
 
 	/**
