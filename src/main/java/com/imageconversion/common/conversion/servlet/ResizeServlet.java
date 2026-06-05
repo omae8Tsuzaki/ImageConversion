@@ -25,11 +25,27 @@ import com.imageconversion.common.utils.FileValidator;
 public class ResizeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
+	/** リサイズ後に許容する最大の幅・高さ（ピクセル）のデフォルト値。 */
+	private static final int DEFAULT_MAX_DIMENSION = 10000;
+
+	/** リサイズ後に許容する最大の幅・高さ（ピクセル）。 */
+	private final int maxDimension;
+
     /**
      * @see HttpServlet#HttpServlet()
      */
     public ResizeServlet() {
+        this(DEFAULT_MAX_DIMENSION);
+    }
+
+    /**
+     * <p>許容する最大の幅・高さを指定してインスタンスを生成する。</p>
+     *
+     * @param maxDimension リサイズ後に許容する最大の幅・高さ（ピクセル）
+     */
+    public ResizeServlet(int maxDimension) {
         super();
+        this.maxDimension = maxDimension;
     }
 
 	/**
@@ -56,6 +72,15 @@ public class ResizeServlet extends HttpServlet {
 			request.getRequestDispatcher("/function/exceptionMessage.jsp").forward(request, response);
 			return;
 		}
+
+        // 寸法の範囲チェック（過大な値によるメモリ枯渇を防止）
+        if (newWidth < 1 || newHeight < 1 ||
+        		newWidth > maxDimension || newHeight > maxDimension) {
+        	request.setAttribute("exception",
+        			"幅と高さは1以上" + maxDimension + "以下で入力してください");
+        	request.getRequestDispatcher("/function/exceptionMessage.jsp").forward(request, response);
+        	return;
+        }
 
         try {
         	BufferedImage originalImage = FileValidator.readImage(filePart);

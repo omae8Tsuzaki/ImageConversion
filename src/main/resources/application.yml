@@ -17,3 +17,6 @@ app:
     dir: C:/Download/
   temp:
     dir: ${java.io.tmpdir}/imageconversion
+  resize:
+    # リサイズ後に許容する最大の幅・高さ（ピクセル）
+    max-dimension: 10000

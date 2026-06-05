@@ -26,7 +26,10 @@ public class ApplicationConfigTest {
 		// 実行・検証
 		assertEquals(
 				ApplicationConfig.class.getName()
-				+ "[uploadDir=C:/Download/]"
+				+ "["
+					+ "uploadDir=C:/Download/, "
+					+ "maxResizeDimension=10000"
+				+ "]"
 				, config.toString());
 	}
 

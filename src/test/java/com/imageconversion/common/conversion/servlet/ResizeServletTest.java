@@ -27,6 +27,8 @@ import org.junit.jupiter.api.Test;
  * <li>{@link #doPostError01}異常系：画像ファイルが選択されていない場合</li>
  * <li>{@link #doPostError02}異常系：無効な画像データが送信された場合</li>
  * <li>{@link #doPostError03}異常系：幅と高さが数値以外の入力の場合</li>
+ * <li>{@link #doPostError04}異常系：幅または高さが許容範囲外（過大）の場合</li>
+ * <li>{@link #doPostError05}異常系：幅または高さが1未満の場合</li>
  * </ul>
  */
 public class ResizeServletTest {
@@ -152,6 +154,58 @@ public class ResizeServletTest {
 		// 検証
 		verify(request).setAttribute(eq("exception"), contains("幅と高さは数値で入力してください"));
 		verify(dispatcher).forward(request, response);
+	}
+
+	/**
+	 * <p>{@link ResizeServlet#doPost(HttpServletRequest, HttpServletResponse)}の異常系テスト。</p>
+	 * <p>幅または高さが許容範囲を超える（過大な）場合</p>
+	 *
+	 * @throws Exception 想定外のエラーが発生した場合
+	 */
+	@Test
+	public void doPostError04() throws Exception {
+		// モックの設定
+		when(request.getPart("imageFile")).thenReturn(imagePart);
+		when(request.getParameter("width")).thenReturn("100000"); // 上限超過
+		when(request.getParameter("height")).thenReturn("100");
+
+		when(imagePart.getSize()).thenReturn(100L);
+		when(request.getRequestDispatcher("/function/exceptionMessage.jsp")).thenReturn(dispatcher);
+
+		// 実行
+		resizeServlet.doPost(request, response);
+
+		// 検証
+		verify(request).setAttribute(eq("exception"), contains("以下で入力してください"));
+		verify(dispatcher).forward(request, response);
+		// 画像処理に進まないこと
+		verify(imagePart, never()).getInputStream();
+	}
+
+	/**
+	 * <p>{@link ResizeServlet#doPost(HttpServletRequest, HttpServletResponse)}の異常系テスト。</p>
+	 * <p>幅または高さが1未満の場合</p>
+	 *
+	 * @throws Exception 想定外のエラーが発生した場合
+	 */
+	@Test
+	public void doPostError05() throws Exception {
+		// モックの設定
+		when(request.getPart("imageFile")).thenReturn(imagePart);
+		when(request.getParameter("width")).thenReturn("0"); // 1未満
+		when(request.getParameter("height")).thenReturn("-5"); // 負値
+
+		when(imagePart.getSize()).thenReturn(100L);
+		when(request.getRequestDispatcher("/function/exceptionMessage.jsp")).thenReturn(dispatcher);
+
+		// 実行
+		resizeServlet.doPost(request, response);
+
+		// 検証
+		verify(request).setAttribute(eq("exception"), contains("1以上"));
+		verify(dispatcher).forward(request, response);
+		// 画像処理に進まないこと
+		verify(imagePart, never()).getInputStream();
 	}
 
 }

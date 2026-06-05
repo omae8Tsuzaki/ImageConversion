@@ -22,10 +22,12 @@ import com.imageconversion.common.sample.servlet.SampleCalcServlet;
 public class ServletConfig {
 
     @Bean
-    public ServletRegistrationBean<ResizeServlet> resizeServlet(MultipartConfigElement multipartConfigElement) {
+    public ServletRegistrationBean<ResizeServlet> resizeServlet(MultipartConfigElement multipartConfigElement,
+    		ApplicationConfig applicationConfig) {
     	ServletRegistrationBean<ResizeServlet> registration =
-                new ServletRegistrationBean<>(new ResizeServlet(), "/function/resize");
-    	
+                new ServletRegistrationBean<>(
+                		new ResizeServlet(applicationConfig.getMaxResizeDimension()), "/function/resize");
+
     	registration.setMultipartConfig(multipartConfigElement);
         return registration;
     }
