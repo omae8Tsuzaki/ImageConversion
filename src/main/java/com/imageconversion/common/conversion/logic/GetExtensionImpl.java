@@ -26,10 +26,11 @@ public class GetExtensionImpl implements GetExtension{
 	public ImageExtension findImageExtension(String extParam) {
 		ImageExtension result = null;
 		
+		if (extParam == null || extParam.isEmpty()) {
+            throw new IllegalArgumentException("パラメータは null または空ではいけません。");
+        }
+
         for (ImageExtension ext : ImageExtension.values()) {
-        	if (extParam == null || extParam.isEmpty()) {
-                throw new IllegalArgumentException("パラメータは null または空ではいけません。");
-            }
             if (ext.getExtension().equalsIgnoreCase(extParam)
                 || ext.toString().equalsIgnoreCase(extParam)) {
                 result = ext;
