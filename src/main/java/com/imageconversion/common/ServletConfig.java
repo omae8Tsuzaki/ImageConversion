@@ -10,27 +10,14 @@ import com.imageconversion.common.conversion.servlet.ChangeExtensionServlet;
 import com.imageconversion.common.conversion.servlet.GetExtensionServlet;
 import com.imageconversion.common.conversion.servlet.InputImageServlet;
 import com.imageconversion.common.conversion.servlet.OpticalCharacterRecognitionServlet;
-import com.imageconversion.common.conversion.servlet.ResizeServlet;
 import com.imageconversion.common.conversion.servlet.SaveImageServlet;
 import com.imageconversion.common.conversion.servlet.TrimmingServlet;
-import com.imageconversion.common.sample.servlet.SampleCalcServlet;
 
 /**
  * Servlet 登録設定クラス
  */
 @Configuration
 public class ServletConfig {
-
-    @Bean
-    public ServletRegistrationBean<ResizeServlet> resizeServlet(MultipartConfigElement multipartConfigElement,
-    		ApplicationConfig applicationConfig) {
-    	ServletRegistrationBean<ResizeServlet> registration =
-                new ServletRegistrationBean<>(
-                		new ResizeServlet(applicationConfig.getMaxResizeDimension()), "/function/resize");
-
-    	registration.setMultipartConfig(multipartConfigElement);
-        return registration;
-    }
 
     @Bean
     public ServletRegistrationBean<TrimmingServlet> trimmingServlet(MultipartConfigElement multipartConfigElement) {
@@ -85,10 +72,5 @@ public class ServletConfig {
     	
     	registration.setMultipartConfig(multipartConfigElement);
         return registration;
-    }
-
-    @Bean
-    public ServletRegistrationBean<SampleCalcServlet> sampleCalcServlet() {
-        return new ServletRegistrationBean<>(new SampleCalcServlet(), "/function/sampleCalc");
     }
 }
