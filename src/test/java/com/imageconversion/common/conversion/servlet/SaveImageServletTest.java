@@ -20,13 +20,13 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 /**
- * <p>{@link SaveImageServlet}のテストクラス。</p>
+ * <p>{@link SaveImageServlet} のテストクラス。</p>
  * 
  * <h4>doPost メソッド</h4>
  * <ul>
- * <li>{@link #doPostSuccess01} 正常系：画像の保存が成功した場合</li>
- * <li>{@link #doPostError01} 異常系：base64Image パラメータが null の場合</li>
- * <li>{@link #doPostError02} 異常系：extension パラメータが null の場合</li>
+ *  <li>{@link #doPostSuccess01} 正常系：画像の保存が成功した場合</li>
+ *  <li>{@link #doPostError01} 異常系：base64Image パラメータが null の場合</li>
+ *  <li>{@link #doPostError02} 異常系：extension パラメータが null の場合</li>
  * </ul>
  */
 public class SaveImageServletTest {
@@ -62,7 +62,11 @@ public class SaveImageServletTest {
 	@Test
 	public void doPostSuccess01() throws Exception {
 		
-		// Base64の文字列を作成
+		//
+		// 事前準備
+		//
+		
+		// Base64 の文字列を作成
 		BufferedImage dummyImage = new BufferedImage(10, 10, BufferedImage.TYPE_INT_RGB);
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
 		ImageIO.write(dummyImage, "jpg", baos);
@@ -87,7 +91,7 @@ public class SaveImageServletTest {
 		verify(request).setAttribute(eq("saveImagePath"), any(String.class));
 		verify(dispatcher).forward(request, response);
 	}
-	
+
 	/**
 	 * <p>doPost メソッドの正常系テスト：画像の保存が成功した場合。（base64Image の先頭に data:image/png;base64, あり）</p>
 	 * 
@@ -95,14 +99,19 @@ public class SaveImageServletTest {
 	 */
 	@Test
 	public void doPostSuccess02() throws Exception {
+		
+		//
+		// 事前準備
+		//
+		
 		// 出力先ディレクトリのパスを取得
 		File file = new File("src/test/resources/TestJpg.jpg");
 		if (!file.exists()) {
 			throw new IllegalArgumentException("テストファイルが存在しません: " + file.getAbsolutePath());
 		}
-		// ファイル内容をbyte[]に読み込む
+		// ファイル内容を byte[] に読み込む
 		byte[] data = Files.readAllBytes(file.toPath());
-		// byte[]をbase64文字列に変換する
+		// byte[] を base64 文字列に変換する
 		String base64Image = Base64.getEncoder().encodeToString(data);
 
 		// モックの設定
@@ -131,6 +140,11 @@ public class SaveImageServletTest {
 	 */
 	@Test
 	public void doPostError01() throws Exception {
+		
+		//
+		// 事前準備
+		//
+		
 		// モックの設定
 		String extension = "jpg";
 		when(request.getParameter("base64Image")).thenReturn(null);
@@ -146,7 +160,7 @@ public class SaveImageServletTest {
 		//
 		verify(response).sendRedirect("../home/Menu.html");
 	}
-	
+
 	/**
 	 * <p>doPost メソッドの異常系テスト：extension パラメータが null の場合。</p>
 	 * 
@@ -154,6 +168,11 @@ public class SaveImageServletTest {
 	 */
 	@Test
 	public void doPostError02() throws Exception {
+		
+		//
+		// 事前準備
+		//
+		
 		// モックの設定
 		String base64Image = "data:image/png;base64......";
 		when(request.getParameter("base64Image")).thenReturn(base64Image);

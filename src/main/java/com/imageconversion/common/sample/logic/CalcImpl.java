@@ -1,9 +1,12 @@
 package com.imageconversion.common.sample.logic;
 
+import org.springframework.stereotype.Service;
+
 /**
  * <p>計算処理を行うクラス。</p>
  * <p>サンプル用に作成したクラス。</p>
  */
+@Service
 public class CalcImpl {
 	
 	/**

@@ -21,9 +21,9 @@ import com.imageconversion.common.utils.FileToPart;
  * 
  * <h4>doPost メソッド</h4>
  * <ul>
- * <li>{@link #doPostSuccess01}正常系：画像ファイルからOCR結果を取得する</li>
- * <li>{@link #doPostError01}異常系：画像ファイルが選択されていない場合</li>
- * <li>{@link #doPostError02}異常系：無効な画像ファイルが指定された場合</li>
+ *  <li>{@link #doPostSuccess01}正常系：画像ファイルから OCR 結果を取得する</li>
+ *  <li>{@link #doPostError01}異常系：画像ファイルが選択されていない場合</li>
+ *  <li>{@link #doPostError02}異常系：無効な画像ファイルが指定された場合</li>
  * </ul>
  */
 public class OpticalCharacterRecognitionServletTest {
@@ -46,13 +46,15 @@ public class OpticalCharacterRecognitionServletTest {
     }
 
     /**
-     * <p>正常系：画像ファイルからOCR結果を取得する。</p>
+     * <p>正常系：画像ファイルから OCR 結果を取得する。</p>
      * 
      * @throws Exception 想定外のエラーが発生した場合
      */
 	@Test
 	public void doPostSuccess01() throws Exception {
-		// 準備
+		//
+		// 事前準備
+		//
 		String testImagePath = "src/test/resources/OCR_test01.png";
 		File inputFile = new File(testImagePath);
 		Part imagePart = FileToPart.fromFile("upload", inputFile);
@@ -85,6 +87,11 @@ public class OpticalCharacterRecognitionServletTest {
 	 */
 	@Test
 	public void doPostError01() throws Exception {
+		
+		//
+		// 事前準備
+		//
+
 		// モックの設定
 		when(request.getPart("imageFile")).thenReturn(null);
 
@@ -98,7 +105,7 @@ public class OpticalCharacterRecognitionServletTest {
 		//
 		verify(response).sendRedirect("/function/opticalCharacterRecognition.jsp");
 	}
-	
+
 	/**
 	 * <p>異常系：無効な画像ファイルが指定された場合。</p>
 	 * 
@@ -106,6 +113,11 @@ public class OpticalCharacterRecognitionServletTest {
 	 */
 	@Test
 	public void doPostError02() throws Exception {
+		
+		//
+		// 事前準備
+		//
+		
 		// モックの設定
 		Part imagePart = mock(Part.class);
 		when(request.getPart("imageFile")).thenReturn(imagePart);

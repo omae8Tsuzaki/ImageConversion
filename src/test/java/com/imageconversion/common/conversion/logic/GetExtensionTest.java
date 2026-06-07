@@ -9,56 +9,81 @@ import org.junit.jupiter.api.Test;
 import com.imageconversion.common.enums.ImageExtension;
 
 /**
- * <p>{@link GetExtension}のテストクラス。</p>
+ * <p>{@link GetExtension} のテストクラス。</p>
  * 
  * <h4>{@link GetExtensionImpl#getExtensionList} のテスト</h4>
  * <ul>
- * <li>{@link #getExtensionListSuccess01} 正常系：拡張子の一覧が取得できる</li>
+ *  <li>{@link #getExtensionListSuccess01} 正常系：拡張子の一覧が取得できる</li>
  * </ul>
  * 
  * <h4>{@link GetExtensionImpl#findImageExtension} のテスト</h4>
  * <ul>
- * <li>{@link #findImageExtensionSuccess01} 正常系：指定した拡張子文字列から ImageExtension を特定できる</li>
- * <li>{@link #findImageExtensionError01} 異常系：引数がnullの場合</li>
- * <li>{@link #findImageExtensionError02} 異常系：引数が空文字列の場合</li>
+ *  <li>{@link #findImageExtensionSuccess01} 正常系：指定した拡張子文字列から ImageExtension を特定できる</li>
+ *  <li>{@link #findImageExtensionError01} 異常系：引数が null の場合</li>
+ *  <li>{@link #findImageExtensionError02} 異常系：引数が空文字列の場合</li>
  * </ul>
  */
 public class GetExtensionTest {
 
 	/**
 	 * <p>正常系：拡張子一覧を取得できること。</p>
+	 * 
+	 * @throws Exception 想定外のエラーが発生した場合
 	 */
 	@Test
-	public void getExtensionListSuccess01() {
+	public void getExtensionListSuccess01() throws Exception {
+		
+		//
+		// 事前準備
+		//
 		GetExtension logic = new GetExtensionImpl();
 		
+		//
 		// 実行
+		//
 		List<String> result = logic.getExtensionList();
 		
+		//
 		// 検証
+		//
 		List<String> expected = List.of("jpg", "png", "gif", "bmp");
 		assertEquals(expected, result);
 	}
 	
 	/**
 	 * <p>正常系：指定した拡張子文字列から ImageExtension を特定できること。</p>
+	 * 
+	 * @throws Exception 想定外のエラーが発生した場合
 	 */
 	@Test
-	public void findImageExtensionSuccess01() {
+	public void findImageExtensionSuccess01() throws Exception {
+		//
+		// 事前準備
+		//
 		GetExtension logic = new GetExtensionImpl();
 
+		//
 		// 実行
+		//
 		ImageExtension result = logic.findImageExtension("jpg");
 
+		//
 		// 検証
+		//
 		assertEquals(ImageExtension.JPG, result);
 	}
 	
 	/**
-	 * <p>異常系：引数がnullの場合。</p>
+	 * <p>異常系：引数が null の場合。</p>
+	 * 
+	 * @throws 想定外のエラーが発生した場合
 	 */
 	@Test
 	public void findImageExtensionError01() {
+		
+		//
+		// 事前準備
+		//
 		GetExtension logic = new GetExtensionImpl();
 
 		// 実行
@@ -73,9 +98,15 @@ public class GetExtensionTest {
 	
 	/**
 	 * <p>異常系：引数が空文字列の場合。</p>
+	 * 
+	 * @throws Exception 想定外のエラーが発生した場合
 	 */
 	@Test
-	public void findImageExtensionError02() {
+	public void findImageExtensionError02() throws Exception {
+		
+		//
+		// 事前準備
+		//
 		GetExtension logic = new GetExtensionImpl();
 
 		// 実行

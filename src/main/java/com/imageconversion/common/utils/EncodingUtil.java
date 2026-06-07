@@ -11,10 +11,10 @@ public class EncodingUtil {
 	}
 
 	/**
-	 * <p>Shift_JISからUTF-8に変換する．</p>
+	 * <p>Shift_JIS から UTF-8 に変換する．</p>
 	 * 
-	 * @param input 変換対象の文字列（Shift_JISエンコード）
-	 * @return 変換後の文字列（UTF-8エンコード）
+	 * @param input 変換対象の文字列（Shift_JIS エンコード）
+	 * @return 変換後の文字列（UTF-8 エンコード）
 	 */
 	public static String convertToUTF8(String input) {
 		// 入力がnullの場合は空文字列を返す

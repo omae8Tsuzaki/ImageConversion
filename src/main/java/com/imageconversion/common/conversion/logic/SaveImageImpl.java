@@ -9,6 +9,8 @@ import javax.imageio.ImageIO;
 
 import jakarta.servlet.http.Part;
 
+import org.springframework.stereotype.Service;
+
 import com.imageconversion.common.exception.LogicException;
 import com.imageconversion.common.utils.EncodingUtil;
 import com.imageconversion.common.utils.Sanitize;
@@ -16,6 +18,7 @@ import com.imageconversion.common.utils.Sanitize;
 /**
  * <p>画像を保存するロジックの実装クラス。</p>
  */
+@Service
 public class SaveImageImpl implements SaveImage {
 	
 	/**
@@ -30,7 +33,7 @@ public class SaveImageImpl implements SaveImage {
 	@Override
 	public String saveImage(byte[] imageBytes, String outputDir, String outputFileName) throws LogicException {
 		try {
-			// 出力ファイル名のエンコードをUTF-8に変換
+			// 出力ファイル名のエンコードを UTF-8 に変換
 			outputFileName = EncodingUtil.convertToUTF8(outputFileName);
 			// バイト配列から画像を復元
 			BufferedImage image = ImageIO.read(new ByteArrayInputStream(imageBytes));
@@ -59,7 +62,7 @@ public class SaveImageImpl implements SaveImage {
 	/**
 	 * <p>画像を指定されたディレクトリに保存する。</p>
 	 * 
-	 * @param part アップロードされた画像ファイルのPartオブジェクト
+	 * @param part アップロードされた画像ファイルの Part オブジェクト
 	 * @param uploadDir 保存先のディレクトリパス
 	 * @return 保存されたファイルの名前
 	 * @throws IOException 画像の保存に失敗した場合

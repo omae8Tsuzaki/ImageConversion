@@ -15,16 +15,16 @@ import com.imageconversion.common.conversion.logic.GetExtension;
 import com.imageconversion.common.conversion.logic.GetExtensionImpl;
 
 /**
- * <p>{@link GetExtensionServlet}のテストクラス。</p>
+ * <p>{@link GetExtensionServlet} のテストクラス。</p>
  * 
- * <h4>doGetメソッド</h4>
+ * <h4>doGet メソッド</h4>
  * <ul>
- * <li>{@link #doGetSuccess01} 正常系：拡張子一覧を取得してJSPに渡す</li>
+ *  <li>{@link #doGetSuccess01} 正常系：拡張子一覧を取得して JSP に渡す</li>
  * </ul>
  * 
- * <h4>doPostメソッド</h4>
+ * <h4>doPost メソッド</h4>
  * <ul>
- * <li>{@link #doPostSuccess01} 正常系：拡張子一覧を取得してJSPに渡す</li>
+ *  <li>{@link #doPostSuccess01} 正常系：拡張子一覧を取得して JSP に渡す</li>
  * </ul>
  */
 public class GetExtensionServletTest {
@@ -49,12 +49,17 @@ public class GetExtensionServletTest {
     }
 
 	/**
-	 * <p>正常系：拡張子一覧を取得してJSPに渡す。</p>
+	 * <p>正常系：拡張子一覧を取得して JSP に渡す。</p>
 	 * 
 	 * @throws Exception 想定外のエラーが発生した場合
 	 */
 	@Test
 	public void doGetSuccess01() throws Exception {
+		
+		//
+		// 事前準備
+		//
+		
 		// モックの設定
 		when(request.getRequestDispatcher("/function/changeExtension.jsp")).thenReturn(dispatcher);
 		
@@ -72,12 +77,17 @@ public class GetExtensionServletTest {
 	}
 	
 	/**
-	 * <p>正常系：拡張子一覧を取得してJSPに渡す。</p>
+	 * <p>正常系：拡張子一覧を取得して JSP に渡す。</p>
 	 * 
 	 * @throws Exception 想定外のエラーが発生した場合
 	 */
 	@Test
 	public void doPostSuccess01() throws Exception {
+		
+		//
+		// 事前準備
+		//
+		
 		// モックの設定
 		when(request.getRequestDispatcher("/function/changeExtension.jsp")).thenReturn(dispatcher);
 

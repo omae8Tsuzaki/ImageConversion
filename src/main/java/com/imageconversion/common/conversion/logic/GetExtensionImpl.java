@@ -4,11 +4,14 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.stereotype.Service;
+
 import com.imageconversion.common.enums.ImageExtension;
 
 /**
  * <p>画像の拡張子を取得するロジックの実装クラス。</p>
  */
+@Service
 public class GetExtensionImpl implements GetExtension{
 
 	@Override

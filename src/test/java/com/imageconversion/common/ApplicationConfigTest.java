@@ -8,7 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
 
 /**
- * <p>{@link ApplicationConfig}のテストクラス。</p>
+ * <p>{@link ApplicationConfig} のテストクラス。</p>
  */
 @SpringBootTest
 @ContextConfiguration(classes = ApplicationConfig.class)
@@ -19,9 +19,11 @@ public class ApplicationConfigTest {
 
 	/**
 	 * <p>正常系のテスト。</p>
+	 * 
+	 * @throws Exception 想定外のエラーが発生した場合
 	 */
 	@Test
-	public void toStringSuccess01() {
+	public void toStringSuccess01() throws Exception {
 
 		// 実行・検証
 		assertEquals(

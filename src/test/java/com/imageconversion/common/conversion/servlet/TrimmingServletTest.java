@@ -20,21 +20,21 @@ import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 
 /**
- * <p>{@link TrimmingServlet}のテストクラス。</p>
+ * <p>{@link TrimmingServlet} のテストクラス。</p>
  * 
  * <h4>doPost メソッド</h4>
  * <ul>
- * <li>{@link #doPostSuccess01} 正常系：画像のトリミングが成功した場合</li>
- * <li>{@link #doPostError01} 異常系：画像ファイルが選択されていない場合</li>
- * <li>{@link #doPostError02} 異常系：無効な画像データが送信された場合</li>
- * <li>{@link #doPostError03} 異常系：トリミング範囲が画像外の場合（x 座標が負の値）</li>
- * <li>{@link #doPostError04} 異常系：トリミング範囲が画像外の場合（y 座標が負の値）</li>
- * <li>{@link #doPostError05} 異常系：トリミング範囲が画像外の場合（x 座標 が画像幅を超える）</li>
- * <li>{@link #doPostError06} 異常系：トリミング範囲が画像外の場合（y 座標 が画像高さを超える）</li>
- * <li>{@link #doPostError07} 異常系：トリミング範囲が画像外の場合（幅が0以下）</li>
- * <li>{@link #doPostError08} 異常系：トリミング範囲が画像外の場合（高さが0以下）</li>
- * <li>{@link #doPostError09} 異常系：トリミング範囲が画像外の場合（x 座標 + 幅 が画像幅を超える）</li>
- * <li>{@link #doPostError10} 異常系：トリミング範囲が画像外の場合（y 座標 + 高さ が画像高さを超える）</li>
+ *  <li>{@link #doPostSuccess01} 正常系：画像のトリミングが成功した場合</li>
+ *  <li>{@link #doPostError01} 異常系：画像ファイルが選択されていない場合</li>
+ *  <li>{@link #doPostError02} 異常系：無効な画像データが送信された場合</li>
+ *  <li>{@link #doPostError03} 異常系：トリミング範囲が画像外の場合（x 座標が負の値）</li>
+ *  <li>{@link #doPostError04} 異常系：トリミング範囲が画像外の場合（y 座標が負の値）</li>
+ *  <li>{@link #doPostError05} 異常系：トリミング範囲が画像外の場合（x 座標 が画像幅を超える）</li>
+ *  <li>{@link #doPostError06} 異常系：トリミング範囲が画像外の場合（y 座標 が画像高さを超える）</li>
+ *  <li>{@link #doPostError07} 異常系：トリミング範囲が画像外の場合（幅が0以下）</li>
+ *  <li>{@link #doPostError08} 異常系：トリミング範囲が画像外の場合（高さが0以下）</li>
+ *  <li>{@link #doPostError09} 異常系：トリミング範囲が画像外の場合（x 座標 + 幅 が画像幅を超える）</li>
+ *  <li>{@link #doPostError10} 異常系：トリミング範囲が画像外の場合（y 座標 + 高さ が画像高さを超える）</li>
  * </ul>
  */
 public class TrimmingServletTest {
@@ -66,7 +66,11 @@ public class TrimmingServletTest {
 	@Test
 	public void doPostSuccess01() throws Exception {
 		
-		// 準備：ダミー画像を作成
+		//
+		// 事前準備
+		//
+		
+		// ダミー画像を作成
 		BufferedImage dummyImage = new BufferedImage(150, 150, BufferedImage.TYPE_INT_RGB);
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
 		ImageIO.write(dummyImage, "jpg", baos);
@@ -94,7 +98,7 @@ public class TrimmingServletTest {
 		verify(request).setAttribute(eq("base64Image"), base64Captor.capture());
 		verify(dispatcher).forward(request, response);
 	}
-	
+
 	/**
 	 * <p>doPost メソッドの異常系テスト：画像ファイルが選択されていない場合。</p>
 	 * 
@@ -102,6 +106,11 @@ public class TrimmingServletTest {
 	 */
 	@Test
 	public void doPostError01() throws Exception {
+		
+		//
+		// 事前準備
+		//
+		
 		// モックの設定
 		when(request.getPart("imageFile")).thenReturn(null);
 		when(request.getParameter("x")).thenReturn("10");
@@ -128,6 +137,11 @@ public class TrimmingServletTest {
 	 */
 	@Test
 	public void doPostError02() throws Exception {
+		
+		//
+		// 事前準備
+		//
+		
 		// モックの設定
 		when(request.getPart("imageFile")).thenReturn(imagePart);
 		when(imagePart.getSize()).thenReturn(100L);
@@ -157,7 +171,12 @@ public class TrimmingServletTest {
 	 */
 	@Test
 	public void doPostError03() throws Exception {
-		// 準備：ダミー画像を作成
+		
+		//
+		// 事前準備
+		//
+		
+		// ダミー画像を作成
 		BufferedImage dummyImage = new BufferedImage(150, 150, BufferedImage.TYPE_INT_RGB);
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
 		ImageIO.write(dummyImage, "jpg", baos);
@@ -192,7 +211,12 @@ public class TrimmingServletTest {
 	 */
 	@Test
 	public void doPostError04() throws Exception {
-		// 準備：ダミー画像を作成
+		
+		//
+		// 事前準備
+		//
+		
+		// ダミー画像を作成
 		BufferedImage dummyImage = new BufferedImage(150, 150, BufferedImage.TYPE_INT_RGB);
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
 		ImageIO.write(dummyImage, "jpg", baos);
@@ -227,7 +251,12 @@ public class TrimmingServletTest {
 	 */
 	@Test
 	public void doPostError05() throws Exception {
-		// 準備：ダミー画像を作成
+		
+		//
+		// 事前準備
+		//
+		
+		// ダミー画像を作成
 		BufferedImage dummyImage = new BufferedImage(150, 150, BufferedImage.TYPE_INT_RGB);
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
 		ImageIO.write(dummyImage, "jpg", baos);
@@ -262,7 +291,12 @@ public class TrimmingServletTest {
 	 */
 	@Test
 	public void doPostError06() throws Exception {
-		// 準備：ダミー画像を作成
+		
+		//
+		// 事前準備
+		//
+		
+		// ダミー画像を作成
 		BufferedImage dummyImage = new BufferedImage(150, 150, BufferedImage.TYPE_INT_RGB);
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
 		ImageIO.write(dummyImage, "jpg", baos);
@@ -289,7 +323,7 @@ public class TrimmingServletTest {
 		verify(request).setAttribute(eq("exception"), contains("トリミング範囲が不正です"));
 		verify(dispatcher).forward(request, response);
 	}
-	
+
 	/**
 	 * <p>doPost メソッドの異常系テスト：トリミング範囲が画像外の場合（幅が0以下）。</p>
 	 * 
@@ -297,7 +331,12 @@ public class TrimmingServletTest {
 	 */
 	@Test
 	public void doPostError07() throws Exception {
-		// 準備：ダミー画像を作成
+		
+		//
+		// 事前準備
+		//
+
+		// ダミー画像を作成
 		BufferedImage dummyImage = new BufferedImage(150, 150, BufferedImage.TYPE_INT_RGB);
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
 		ImageIO.write(dummyImage, "jpg", baos);
@@ -324,7 +363,7 @@ public class TrimmingServletTest {
 		verify(request).setAttribute(eq("exception"), contains("トリミング範囲が不正です"));
 		verify(dispatcher).forward(request, response);
 	}
-	
+
 	/**
 	 * <p>doPost メソッドの異常系テスト：トリミング範囲が画像外の場合（高さが0以下）。</p>
 	 * 
@@ -332,7 +371,12 @@ public class TrimmingServletTest {
 	 */
 	@Test
 	public void doPostError08() throws Exception {
-		// 準備：ダミー画像を作成
+		
+		//
+		// 事前準備
+		//
+
+		// ダミー画像を作成
 		BufferedImage dummyImage = new BufferedImage(150, 150, BufferedImage.TYPE_INT_RGB);
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
 		ImageIO.write(dummyImage, "jpg", baos);
@@ -359,7 +403,7 @@ public class TrimmingServletTest {
 		verify(request).setAttribute(eq("exception"), contains("トリミング範囲が不正です"));
 		verify(dispatcher).forward(request, response);
 	}
-	
+
 	/**
 	 * <p>doPost メソッドの異常系テスト：トリミング範囲が画像外の場合（x 座標 + 幅 が画像幅を超える）。</p>
 	 * 
@@ -367,7 +411,12 @@ public class TrimmingServletTest {
 	 */
 	@Test
 	public void doPostError09() throws Exception {
-		// 準備：ダミー画像を作成
+
+		//
+		// 事前準備
+		//
+
+		// ダミー画像を作成
 		BufferedImage dummyImage = new BufferedImage(150, 150, BufferedImage.TYPE_INT_RGB);
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
 		ImageIO.write(dummyImage, "jpg", baos);
@@ -394,7 +443,7 @@ public class TrimmingServletTest {
 		verify(request).setAttribute(eq("exception"), contains("トリミング範囲が不正です"));
 		verify(dispatcher).forward(request, response);
 	}
-	
+
 	/**
 	 * <p>doPost メソッドの異常系テスト：トリミング範囲が画像外の場合（y 座標 + 高さ が画像高さを超える）。</p>
 	 * 
@@ -402,7 +451,12 @@ public class TrimmingServletTest {
 	 */
 	@Test
 	public void doPostError10() throws Exception {
-		// 準備：ダミー画像を作成
+		
+		//
+		// 事前準備
+		//
+
+		// ダミー画像を作成
 		BufferedImage dummyImage = new BufferedImage(150, 150, BufferedImage.TYPE_INT_RGB);
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
 		ImageIO.write(dummyImage, "jpg", baos);

@@ -19,13 +19,13 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
- * <p>{@link ChangeExtensionServlet}のテストクラス。</p>
+ * <p>{@link ChangeExtensionServlet} のテストクラス。</p>
  * 
  * <h4>doPost メソッド</h4>
  * <ul>
- * <li>{@link #doPostSuccess01} 正常系：画像ファイルが選択され、拡張子変更が成功した場合</li>
- * <li>{@link #doPostError01} 異常系：画像ファイルが選択されていない場合</li>
- * <li>{@link #doPostError02} 異常系：無効な拡張子が指定された場合</li>
+ *  <li>{@link #doPostSuccess01} 正常系：画像ファイルが選択され、拡張子変更が成功した場合</li>
+ *  <li>{@link #doPostError01} 異常系：画像ファイルが選択されていない場合</li>
+ *  <li>{@link #doPostError02} 異常系：無効な拡張子が指定された場合</li>
  * </ul>
  */
 public class ChangeExtensionServletTest {
@@ -53,6 +53,11 @@ public class ChangeExtensionServletTest {
      */
 	@Test
 	public void doPostSuccess01() throws Exception {
+		
+		//
+		// 事前準備
+		//
+		
 		// 準備: ダミー画像を作成
         BufferedImage dummyImage = new BufferedImage(10, 10, BufferedImage.TYPE_INT_RGB);
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -81,7 +86,7 @@ public class ChangeExtensionServletTest {
 		verify(request).setAttribute(eq("newExtension"), eq("jpg"));
 		verify(dispatcher).forward(request, response);
 	}
-	
+
 	/**
 	 * <p>異常系：画像ファイルが選択されていない場合。</p>
 	 * 
@@ -89,6 +94,11 @@ public class ChangeExtensionServletTest {
 	 */
 	@Test
 	public void doPostError01() throws Exception {
+		
+		//
+		// 事前準備
+		//
+		
 		// モックの設定
 		when(request.getPart("imageFile")).thenReturn(null);
 
@@ -102,7 +112,7 @@ public class ChangeExtensionServletTest {
 		//
 		verify(response).sendRedirect("/function/changeExtension.jsp");
 	}
-	
+
 	/**
 	 * <p>異常系：無効な拡張子が指定された場合。</p>
 	 * 
@@ -110,6 +120,11 @@ public class ChangeExtensionServletTest {
 	 */
 	@Test
 	public void doPostError02() throws Exception {
+		
+		//
+		// 事前準備
+		//
+		
 		// モックの設定
 		when(request.getPart("imageFile")).thenReturn(imagePart);
 		when(imagePart.getSize()).thenReturn(100L);
@@ -128,7 +143,7 @@ public class ChangeExtensionServletTest {
 		verify(request).setAttribute(eq("exception"), contains("無効な拡張子"));
 		verify(dispatcher).forward(request, response);
 	}
-	
+
 	/**
 	 * <p>異常系：無効な画像ファイルが指定された場合。</p>
 	 * 
@@ -136,6 +151,11 @@ public class ChangeExtensionServletTest {
 	 */
 	@Test
 	public void doPostError03() throws Exception {
+		
+		//
+		// 事前準備
+		//
+		
 		// モックの設定
 		when(request.getPart("imageFile")).thenReturn(imagePart);
 		when(imagePart.getSize()).thenReturn(100L);

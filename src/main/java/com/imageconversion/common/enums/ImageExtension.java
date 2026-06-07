@@ -23,7 +23,7 @@ public enum ImageExtension {
 	 * <p>指定された拡張子が有効な拡張子か判定するメソッド。</p>
 	 * 
 	 * @param extension 拡張子文字列
-	 * @return 有効な拡張子ならtrue、そうでなければfalse
+	 * @return 有効な拡張子なら true、そうでなければ false
 	 */
 	public static boolean isValidExtension(String extension) {
         for (ImageExtension ext : values()) {

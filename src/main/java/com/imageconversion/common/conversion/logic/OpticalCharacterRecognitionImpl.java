@@ -5,6 +5,8 @@ import java.io.File;
 
 import javax.imageio.ImageIO;
 
+import org.springframework.stereotype.Service;
+
 import com.imageconversion.common.exception.LogicException;
 
 import net.sourceforge.tess4j.ITessAPI;
@@ -14,13 +16,14 @@ import net.sourceforge.tess4j.Tesseract;
 /**
  * <p>光学文字認識（OCR）のロジックの実装クラス。</p>
  */
+@Service
 public class OpticalCharacterRecognitionImpl implements OpticalCharacterRecognition{
 
 	@Override
 	public String resultOCR(File input, String language) throws LogicException{
 		
 		ITesseract tesseract = new Tesseract();
-		// Tesseractの設定
+		// Tesseract の設定
 		// データセット↓
 		// https://github.com/tesseract-ocr/tessdata/tree/main
 		
@@ -30,7 +33,7 @@ public class OpticalCharacterRecognitionImpl implements OpticalCharacterRecognit
 		
 		try {
 			BufferedImage img = ImageIO.read(input);
-			// OCR処理を実行
+			// OCR 処理を実行
 			String result = tesseract.doOCR(img);
 			return result;
 		} catch (Exception e) {

@@ -16,7 +16,7 @@ import com.imageconversion.common.conversion.servlet.TrimmingServlet;
 import com.imageconversion.common.sample.servlet.SampleCalcServlet;
 
 /**
- * Servlet登録設定クラス
+ * Servlet 登録設定クラス
  */
 @Configuration
 public class ServletConfig {

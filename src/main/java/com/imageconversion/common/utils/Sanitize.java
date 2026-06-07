@@ -13,7 +13,7 @@ public class Sanitize {
 	 * <p>特殊文字をエスケープする．</p>
 	 * 
 	 * @param input エスケープ対象の文字列
-	 * @return エスケープ後の文字列（nullは空文字として扱う）
+	 * @return エスケープ後の文字列（null は空文字として扱う）
 	 */
 	public static String escapeHtml(String input) {
 		if (input == null) {

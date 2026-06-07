@@ -14,22 +14,26 @@ import com.imageconversion.common.exception.LogicException;
  * 
  * <h4>resultOCR メソッド</h4>
  * <ul>
- * <li>{@link #resultOCRSuccess01}正常系：画像ファイルからOCR結果を取得する</li>
- * <li>{@link #resultOCRError01}異常系：存在しない言語コードを指定した場合</li>
+ *  <li>{@link #resultOCRSuccess01}正常系：画像ファイルから OCR 結果を取得する</li>
+ *  <li>{@link #resultOCRError01}異常系：存在しない言語コードを指定した場合</li>
  * </ul>
  */
 public class OpticalCharacterRecognitionImplTest {
 	
-	// OCR結果の許容範囲（Levenshtein 距離）
+	// OCR 結果の許容範囲（Levenshtein 距離）
 	private static final int OCR_THRESHOLD = 10;
 
 	/**
-	 * <p>正常系：画像ファイルからOCR結果を取得する。</p>
+	 * <p>正常系：画像ファイルから OCR 結果を取得する。</p>
 	 * 
 	 * @throws Exception 想定外のエラーが発生した場合
 	 */
 	@Test
 	public void resultOCRSuccess01() throws Exception {
+		
+		//
+		// 事前準備
+		//
 		File input = new File("src/test/resources/OCR_test01.png");
 		if (!input.exists()) {
 			throw new IllegalArgumentException("テストファイルが存在しません: " + input.getAbsolutePath());
@@ -60,9 +64,15 @@ public class OpticalCharacterRecognitionImplTest {
 	
 	/**
 	 * <p>異常系：存在しない言語コードを指定した場合。</p>
+	 * 
+	 * @throws Exception 想定外のエラーが発生した場合
 	 */
 	@Test
-	public void resultOCRError01() {
+	public void resultOCRError01() throws Exception {
+		
+		//
+		// 事前準備
+		//
 		File input = new File("src/test/resources/OCR_test01.png");
 		if (!input.exists()) {
 			throw new IllegalArgumentException("テストファイルが存在しません: " + input.getAbsolutePath());

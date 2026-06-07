@@ -19,14 +19,14 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
- * <p>{@link InputImageServlet}のテストクラス。</p>
+ * <p>{@link InputImageServlet} のテストクラス。</p>
  * 
  * <h4>doGet メソッド</h4>
  * <ul>
- * <li>{@link #doGetSuccess01} 正常系：画像をアップロードした場合</li>
- * <li>{@link #doGetError01} 異常系：画像ファイルが選択されていない場合</li>
- * <li>{@link #doGetError02} 異常系：無効な画像データが送信された場合</li>
- * <li>{@link #doGetError03} 異常系：画像ファイルが選択されているが、サイズが0の場合</li>
+ *  <li>{@link #doGetSuccess01} 正常系：画像をアップロードした場合</li>
+ *  <li>{@link #doGetError01} 異常系：画像ファイルが選択されていない場合</li>
+ *  <li>{@link #doGetError02} 異常系：無効な画像データが送信された場合</li>
+ *  <li>{@link #doGetError03} 異常系：画像ファイルが選択されているが、サイズが0の場合</li>
  * </ul>
  */
 public class InputImageServletTest {
@@ -56,6 +56,11 @@ public class InputImageServletTest {
      */
 	@Test
 	public void doGetSuccess01() throws Exception {
+		
+		//
+		// 事前準備
+		//
+		
 		// 準備: ダミー画像を作成
         BufferedImage dummyImage = new BufferedImage(10, 10, BufferedImage.TYPE_INT_RGB);
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -88,6 +93,11 @@ public class InputImageServletTest {
 	 */
 	@Test
 	public void doGetError01() throws Exception {
+		
+		//
+		// 事前準備
+		//
+		
 		// モックの設定
 		when(request.getPart("imageFile")).thenReturn(null);
 
@@ -109,6 +119,11 @@ public class InputImageServletTest {
 	 */
 	@Test
 	public void doGetError02() throws Exception {
+		
+		//
+		// 事前準備
+		//
+		
 		// モックの設定
 		when(request.getPart("imageFile")).thenReturn(imagePart);
 		when(imagePart.getSubmittedFileName()).thenReturn("testImage.png");
@@ -127,7 +142,7 @@ public class InputImageServletTest {
 		verify(request).setAttribute(eq("exception"), contains("無効な画像ファイルです"));
 		verify(dispatcher).forward(request, response);
 	}
-	
+
 	/**
 	 * <p>異常系：画像ファイルが選択されているが、サイズが0の場合。</p>
 	 * 
@@ -135,6 +150,11 @@ public class InputImageServletTest {
 	 */
 	@Test
 	public void doGetError03() throws Exception {
+		
+		//
+		// 事前準備
+		//
+		
 		// 準備: ダミー画像を作成
         BufferedImage dummyImage = new BufferedImage(10, 10, BufferedImage.TYPE_INT_RGB);
         ByteArrayOutputStream baos = new ByteArrayOutputStream();

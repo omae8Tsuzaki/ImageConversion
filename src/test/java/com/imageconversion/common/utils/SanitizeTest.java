@@ -5,95 +5,129 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
 /**
- * <p>{@link Sanitize}のテストクラス。</p>
+ * <p>{@link Sanitize} のテストクラス。</p>
  * 
  * <h4>escapeHtml メソッド</h4>
  * <ul>
- * <li>{@link #escapeHtmlSuccess01}正常系：HTMLタグが含まれる文字列が入力された場合</li>
- * <li>{@link #escapeHtmlSuccess02}正常系：& が含まれる文字列が入力された場合</li>
- * <li>{@link #escapeHtmlSuccess03}正常系：null が入力された場合</li>
+ *  <li>{@link #escapeHtmlSuccess01}正常系：HTML タグが含まれる文字列が入力された場合</li>
+ *  <li>{@link #escapeHtmlSuccess02}正常系：& が含まれる文字列が入力された場合</li>
+ *  <li>{@link #escapeHtmlSuccess03}正常系：null が入力された場合</li>
  * </ul>
  * 
  * <h4>parseStringToInt メソッド</h4>
  * <ul>
- * <li>{@link #parseStringToIntSuccess01}正常系：数字が入力された場合</li>
- * <li>{@link #parseStringToIntSuccess02}正常系：nullが入力された場合</li>
- * <li>{@link #parseStringToIntSuccess03}正常系：空文字が入力された場合</li>
- * <li>{@link #parseStringToIntError01}異常系：数値以外の文字列が入力された場合</li>
+ *  <li>{@link #parseStringToIntSuccess01}正常系：数字が入力された場合</li>
+ *  <li>{@link #parseStringToIntSuccess02}正常系：null が入力された場合</li>
+ *  <li>{@link #parseStringToIntSuccess03}正常系：空文字が入力された場合</li>
+ *  <li>{@link #parseStringToIntError01}異常系：数値以外の文字列が入力された場合</li>
  * </ul>
  * 
  * <h4>getFileExtension メソッド</h4>
  * <ul>
- * <li>{@link #getFileExtensionSuccess01}正常系：ファイル名が入力された場合</li>
- * <li>{@link #getFileExtensionSuccess02}正常系：ファイル名以外が入力された場合</li>
- * <li>{@link #getFileExtensionSuccess03}正常系：ファイル名が拡張子なしの場合</li>
- * <li>{@link #getFileExtensionError01}異常系：nullが入力された場合</li>
+ *  <li>{@link #getFileExtensionSuccess01}正常系：ファイル名が入力された場合</li>
+ *  <li>{@link #getFileExtensionSuccess02}正常系：ファイル名以外が入力された場合</li>
+ *  <li>{@link #getFileExtensionSuccess03}正常系：ファイル名が拡張子なしの場合</li>
+ *  <li>{@link #getFileExtensionError01}異常系：null が入力された場合</li>
  * </ul>
  */
 public class SanitizeTest {
 
 	/**
-	 * <p>正常系：HTMLタグが含まれる文字列が入力された場合。</p>
+	 * <p>正常系：HTML タグが含まれる文字列が入力された場合。</p>
+	 * 
+	 * @throws Exception 想定外のエラーが発生した場合
 	 */
 	@Test
-	public void escapeHtmlSuccess01() {
+	public void escapeHtmlSuccess01() throws Exception {
+		
+		//
+		// 事前準備
+		//
+		
 		String input = "<script>alert('XSS');</script>";
 		String expected = "&lt;script&gt;alert(&#39;XSS&#39;);&lt;/script&gt;";
 
 		//
 		// 実行
 		//
+		
 		String result = Sanitize.escapeHtml(input);
 
 		//
 		// 検証
 		//
+		
 		assertEquals(expected, result);
 	}
 	
 	/**
 	 * <p>正常系：& が含まれる文字列が入力された場合。</p>
+	 * 
+	 * @throws Exception 想定外のエラーが発生した場合
 	 */
 	@Test
-	public void escapeHtmlSuccess02() {
+	public void escapeHtmlSuccess02() throws Exception {
+		
+		//
+		// 事前準備
+		//
+		
 		String input = "Hello & World";
 		String expected = "Hello &amp; World";
 
 		//
 		// 実行
 		//
+		
 		String result = Sanitize.escapeHtml(input);
 
 		//
 		// 検証
 		//
+		
 		assertEquals(expected, result);
 	}
 	
 	/**
 	 * <p>正常系：null が入力された場合。</p>
+	 * 
+	 * @throws Exception 想定外のエラーが発生した場合
 	 */
 	@Test
-	public void escapeHtmlSuccess03() {
+	public void escapeHtmlSuccess03() throws Exception {
+		
+		//
+		// 事前準備
+		//
+
 		String input = null;
 		String expected = "";
 
 		//
 		// 実行
 		//
+
 		String result = Sanitize.escapeHtml(input);
 
 		//
 		// 検証
 		//
+
 		assertEquals(expected, result);
 	}
 	
 	/**
 	 * <p>正常系：数値が入力された場合。</p>
+	 * 
+	 * @throws Exception 想定外のエラーが発生した場合
 	 */
 	@Test
-	public void parseStringToIntSuccess01() {
+	public void parseStringToIntSuccess01() throws Exception {
+		
+		//
+		// 事前準備
+		//
+		
 		String input = "1";
 		
 		//
@@ -110,9 +144,15 @@ public class SanitizeTest {
 	
 	/**
 	 * <p>正常系：null が入力された場合。</p>
+	 * 
+	 * @throws Exception 想定外のエラーが発生した場合
 	 */
 	@Test
-	public void parseStringToIntSuccess02() {
+	public void parseStringToIntSuccess02() throws Exception {
+		
+		//
+		// 事前準備
+		//
 		String input = null;
 		
 		//
@@ -126,12 +166,18 @@ public class SanitizeTest {
 		int expected = 0;
 		assertEquals(expected, result);
 	}
-	
+
 	/**
 	 * <p>正常系テスト：空文字が入力された場合。</p>
+	 * 
+	 * @throws Exception 想定外のエラーが発生した場合
 	 */
 	@Test
-	public void parseStringToIntSuccess03() {
+	public void parseStringToIntSuccess03() throws Exception {
+		
+		//
+		// 事前準備
+		//
         String input = "";
         
         //
@@ -145,12 +191,18 @@ public class SanitizeTest {
         int expected = 0;
         assertEquals(expected, result);
     }
-	
+
 	/**
 	 * <p>異常系：数値以外の文字列が入力された場合。</p>
+	 * 
+	 * @throws Exception 想定外のエラーが発生した場合
 	 */
 	@Test
-	public void parseStringToIntError01() {
+	public void parseStringToIntError01() throws Exception {
+		
+		//
+		// 事前準備
+		//
 		String input = "abc";
 		
 		try {
@@ -166,12 +218,19 @@ public class SanitizeTest {
 			assertEquals("For input string: \"" + input + "\"", e.getMessage());
 		}
 	}
-	
+
 	/**
 	 * <p>正常系：ファイル名の場合。</p>
+	 * 
+	 * @throws Exception 想定外のエラーが発生した場合
 	 */
 	@Test
-	public void getFileExtensionSuccess01() {
+	public void getFileExtensionSuccess01() throws Exception {
+		
+		//
+		// 事前準備
+		//
+		
 		String fileName = "test_image.jpg";
 		String expected = "jpg";
 		
@@ -185,12 +244,19 @@ public class SanitizeTest {
 		//
 		assertEquals(expected, result);
 	}
-	
+
 	/**
 	 * <p>正常系：ファイル名以外が入力された場合。</p>
+	 * 
+	 * @throws Exception 想定外のエラーが発生した場合
 	 */
 	@Test
-	public void getFileExtensionSuccess02() {
+	public void getFileExtensionSuccess02() throws Exception {
+		
+		//
+		// 事前準備
+		//
+		
 		String notFileName = "abcdefg";
 		String expected = "";
 		
@@ -204,12 +270,18 @@ public class SanitizeTest {
 		//
 		assertEquals(expected, result);
 	}
-	
+
 	/**
 	 * <p>正常系：ファイル名が拡張子なしの場合。</p>
+	 * 
+	 * @throws Exception 想定外のエラーが発生した場合
 	 */
 	@Test
-	public void getFileExtensionSuccess03() {
+	public void getFileExtensionSuccess03() throws Exception {
+		
+		//
+		// 事前準備
+		//
 		String fileName = "no_extension.";
 		
 		//
@@ -222,12 +294,19 @@ public class SanitizeTest {
 		//
 		assertEquals("", result);
 	}
-	
+
 	/**
-	 * <p>異常系：nullが入力された場合。</p>
+	 * <p>異常系：null が入力された場合。</p>
+	 * 
+	 * @throws Exception 想定外のエラーが発生した場合
 	 */
 	@Test
-	public void getFileExtensionError01() {
+	public void getFileExtensionError01() throws Exception {
+		
+		//
+		// 事前準備
+		//
+		
 		String fileName = null;
 
 		//

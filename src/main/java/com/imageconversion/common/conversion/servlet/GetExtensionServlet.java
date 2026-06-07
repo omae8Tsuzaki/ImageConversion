@@ -28,7 +28,7 @@ public class GetExtensionServlet extends HttpServlet {
     }
 
 	/**
-	 * <p>拡張子一覧を取得してJSPに渡す（画面初期表示など）。</p>
+	 * <p>拡張子一覧を取得して JSP に渡す（画面初期表示など）。</p>
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		GetExtension logic = new GetExtensionImpl();
@@ -42,7 +42,7 @@ public class GetExtensionServlet extends HttpServlet {
 	}
 
 	/**
-	 * <p>ユーザーが送信した拡張子文字列から ImageExtension を特定し、結果をJSPに返す。</p>
+	 * <p>ユーザーが送信した拡張子文字列から ImageExtension を特定し、結果を JSPに返す。</p>
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		GetExtension logic = new GetExtensionImpl();
@@ -50,7 +50,7 @@ public class GetExtensionServlet extends HttpServlet {
 		
 		request.setAttribute("extensions", extensions);
 	    
-		// JSPにフォワード
+		// JSP にフォワード
 	    RequestDispatcher dispatcher = request.getRequestDispatcher("/function/changeExtension.jsp");
 	    dispatcher.forward(request, response);
 	}

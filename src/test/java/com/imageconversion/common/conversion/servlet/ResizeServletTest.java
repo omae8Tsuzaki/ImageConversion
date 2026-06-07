@@ -19,16 +19,16 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
- * <p>{@link ResizeServlet}のテストクラス。</p>
+ * <p>{@link ResizeServlet} のテストクラス。</p>
  * 
  * <h4>doPost メソッド</h4>
  * <ul>
- * <li>{@link #doPostSuccess01}正常系：画像ファイルが選択され、リサイズが成功した場合</li>
- * <li>{@link #doPostError01}異常系：画像ファイルが選択されていない場合</li>
- * <li>{@link #doPostError02}異常系：無効な画像データが送信された場合</li>
- * <li>{@link #doPostError03}異常系：幅と高さが数値以外の入力の場合</li>
- * <li>{@link #doPostError04}異常系：幅または高さが許容範囲外（過大）の場合</li>
- * <li>{@link #doPostError05}異常系：幅または高さが1未満の場合</li>
+ *  <li>{@link #doPostSuccess01}正常系：画像ファイルが選択され、リサイズが成功した場合</li>
+ *  <li>{@link #doPostError01}異常系：画像ファイルが選択されていない場合</li>
+ *  <li>{@link #doPostError02}異常系：無効な画像データが送信された場合</li>
+ *  <li>{@link #doPostError03}異常系：幅と高さが数値以外の入力の場合</li>
+ *  <li>{@link #doPostError04}異常系：幅または高さが許容範囲外（過大）の場合</li>
+ *  <li>{@link #doPostError05}異常系：幅または高さが1未満の場合</li>
  * </ul>
  */
 public class ResizeServletTest {
@@ -61,6 +61,11 @@ public class ResizeServletTest {
      */
 	@Test
 	public void doPostSuccess01() throws Exception {
+		
+		//
+		// 事前準備
+		//
+		
 		// モックの設定
 		when(request.getPart("imageFile")).thenReturn(imagePart);
 		when(request.getParameter("width")).thenReturn("100");
@@ -76,10 +81,14 @@ public class ResizeServletTest {
 		when(imagePart.getInputStream()).thenReturn(imageStream);
 		when(request.getRequestDispatcher("/function/resize.jsp")).thenReturn(dispatcher);
 		
+		//
 		// 実行
+		//
 		resizeServlet.doPost(request, response);
 		
+		//
 		// 検証
+		//
 
 		verify(request).setAttribute(eq("base64Image"), any(String.class));
         verify(dispatcher).forward(request, response);
@@ -93,13 +102,22 @@ public class ResizeServletTest {
 	 */
 	@Test
 	public void doPostError01() throws Exception {
+		
+		//
+		// 事前準備
+		//
+		
 		when(request.getPart("imageFile")).thenReturn(null);
 
+		//
 		// 実行
+		//
 		resizeServlet.doPost(request, response);
 
+		//
 		// 検証
-        verify(response).sendRedirect("/function/resize.jsp");
+        //
+		verify(response).sendRedirect("/function/resize.jsp");
 	}
 	
 	/**
@@ -110,6 +128,11 @@ public class ResizeServletTest {
 	 */
 	@Test
 	public void doPostError02() throws Exception {
+		
+		//
+		// 事前準備
+		//
+		
 		// モックの設定
 		when(request.getPart("imageFile")).thenReturn(imagePart);
         when(request.getParameter("width")).thenReturn("100");
@@ -122,10 +145,14 @@ public class ResizeServletTest {
 
         when(request.getRequestDispatcher("/function/exceptionMessage.jsp")).thenReturn(dispatcher);
 
+        //
         // 実行
+        //
         resizeServlet.doPost(request, response);
 
+        //
         // 検証
+        //
         verify(request).setAttribute(eq("exception"), contains("無効な画像"));
         verify(dispatcher).forward(request, response);
 	}
@@ -138,6 +165,11 @@ public class ResizeServletTest {
 	 */
 	@Test
 	public void doPostError03() throws Exception {
+
+		//
+		// 事前準備
+		//
+
 		// モックの設定
 		when(request.getPart("imageFile")).thenReturn(imagePart);
 		when(request.getParameter("width")).thenReturn("abc"); // 数値以外の入力
@@ -148,10 +180,14 @@ public class ResizeServletTest {
 
 		when(request.getRequestDispatcher("/function/exceptionMessage.jsp")).thenReturn(dispatcher);
 
+		//
 		// 実行
+		//
 		resizeServlet.doPost(request, response);
 
+		//
 		// 検証
+		//
 		verify(request).setAttribute(eq("exception"), contains("幅と高さは数値で入力してください"));
 		verify(dispatcher).forward(request, response);
 	}
@@ -164,6 +200,11 @@ public class ResizeServletTest {
 	 */
 	@Test
 	public void doPostError04() throws Exception {
+		
+		//
+		// 事前準備
+		//
+		
 		// モックの設定
 		when(request.getPart("imageFile")).thenReturn(imagePart);
 		when(request.getParameter("width")).thenReturn("100000"); // 上限超過
@@ -172,10 +213,14 @@ public class ResizeServletTest {
 		when(imagePart.getSize()).thenReturn(100L);
 		when(request.getRequestDispatcher("/function/exceptionMessage.jsp")).thenReturn(dispatcher);
 
+		//
 		// 実行
+		//
 		resizeServlet.doPost(request, response);
 
+		//
 		// 検証
+		//
 		verify(request).setAttribute(eq("exception"), contains("以下で入力してください"));
 		verify(dispatcher).forward(request, response);
 		// 画像処理に進まないこと
@@ -190,6 +235,11 @@ public class ResizeServletTest {
 	 */
 	@Test
 	public void doPostError05() throws Exception {
+		
+		//
+		// 事前準備
+		//
+		
 		// モックの設定
 		when(request.getPart("imageFile")).thenReturn(imagePart);
 		when(request.getParameter("width")).thenReturn("0"); // 1未満
@@ -198,10 +248,14 @@ public class ResizeServletTest {
 		when(imagePart.getSize()).thenReturn(100L);
 		when(request.getRequestDispatcher("/function/exceptionMessage.jsp")).thenReturn(dispatcher);
 
+		//
 		// 実行
+		//
 		resizeServlet.doPost(request, response);
 
+		//
 		// 検証
+		//
 		verify(request).setAttribute(eq("exception"), contains("1以上"));
 		verify(dispatcher).forward(request, response);
 		// 画像処理に進まないこと

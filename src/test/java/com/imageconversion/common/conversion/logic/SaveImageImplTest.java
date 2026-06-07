@@ -23,17 +23,17 @@ import com.imageconversion.common.exception.LogicException;
  * 
  * <h4>saveImage メソッド</h4>
  * <ul>
- * <li>{@link #saveImageSuccess01}正常系：画像を指定されたディレクトリに保存する</li>
- * <li>{@link #saveImageSuccess02}正常系：出力先ディレクトリが存在しない場合、ディレクトリを作成する</li>
- * <li>{@link #saveImageError01}異常系：無効な画像データを保存しようとした場合</li>
+ *  <li>{@link #saveImageSuccess01}正常系：画像を指定されたディレクトリに保存する</li>
+ *  <li>{@link #saveImageSuccess02}正常系：出力先ディレクトリが存在しない場合、ディレクトリを作成する</li>
+ *  <li>{@link #saveImageError01}異常系：無効な画像データを保存しようとした場合</li>
  * </ul>
  * 
  * <h4>savePartImage メソッド</p>
  * <ul>
- * <li>{@link #savePartImageSuccess01}正常系</li>
- * <li>{@link #savePartImageSuccess02}正常系：Partオブジェクトのファイル名が指定されている場合</li>
- * <li>{@link #savePartImageError01}異常系：Partオブジェクトがnullの場合</li>
- * <li>{@link #savePartImageError02}異常系：Partオブジェクトのファイル名がnullの場合</li>
+ *  <li>{@link #savePartImageSuccess01}正常系</li>
+ *  <li>{@link #savePartImageSuccess02}正常系：Part オブジェクトのファイル名が指定されている場合</li>
+ *  <li>{@link #savePartImageError01}異常系：Part オブジェクトが null の場合</li>
+ *  <li>{@link #savePartImageError02}異常系：Part オブジェクトのファイル名が null の場合</li>
  * </ul>
  */
 public class SaveImageImplTest {
@@ -69,6 +69,11 @@ public class SaveImageImplTest {
 	 */
 	@Test
 	public void saveImageSuccess01() throws Exception {
+		
+		//
+		// 事前準備
+		//
+		
 		// 出力先ディレクトリのパスを取得
 		String dirPath = temporaryFolder.getAbsolutePath();
 
@@ -90,6 +95,10 @@ public class SaveImageImplTest {
 	 */
 	@Test
 	public void saveImageSuccess02() throws Exception {
+		
+		//
+		// 事前準備
+		//
 		
 		// 出力先ディレクトリのパスを取得
 		File outputFile = new File(temporaryFolder, "test");
@@ -114,6 +123,9 @@ public class SaveImageImplTest {
 	@Test
 	public void saveImageError01() throws Exception {
 		
+		//
+		// 事前準備
+		//
 		byte[] invalidBytes = "not-an-image".getBytes();
 		
 		//
@@ -137,6 +149,11 @@ public class SaveImageImplTest {
 	 */
 	@Test
 	public void savePartImageSuccess01() throws Exception {
+		
+		//
+		// 事前準備
+		//
+		
 		// 出力先ディレクトリのパスを取得
 		String dirPath = temporaryFolder.getAbsolutePath();
 		
@@ -185,9 +202,11 @@ public class SaveImageImplTest {
 	
 	/**
 	 * <p>異常系：Partオブジェクトがnullの場合。</p>
+	 * 
+	 * @thows Exception 想定外のエラーが発生した場合
 	 */
 	@Test
-	public void savePartImageError01() {
+	public void savePartImageError01() throws Exception {
 		// モックのPartオブジェクトを作成
 		Part mockPart = null;
 		
@@ -207,9 +226,11 @@ public class SaveImageImplTest {
 	
 	/**
 	 * <p>異常系：Partオブジェクトのファイル名がnullの場合。</p>
+	 * 
+	 * @throws Exception 想定外のエラーが発生した場合
 	 */
 	@Test
-	public void savePartImageError02() {
+	public void savePartImageError02() throws Exception {
 		// モックのPartオブジェクトを作成
 		Part mockPart = mock(Part.class);
 		when(mockPart.getSubmittedFileName()).thenReturn(null);
