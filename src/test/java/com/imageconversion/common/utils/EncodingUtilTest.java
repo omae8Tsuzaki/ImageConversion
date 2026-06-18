@@ -16,7 +16,7 @@ import org.junit.jupiter.api.Test;
  * </ul>
  */
 public class EncodingUtilTest {
-	
+
 	/**
 	 * <p>正常系：Shift_JIS から UTF-8 に変換する。</p>
 	 * 
@@ -24,27 +24,27 @@ public class EncodingUtilTest {
 	 */
 	@Test
 	public void convertToUTF8Success01() throws Exception {
-		
+
 		//
 		// 事前準備
 		//
-		
+
 		String original = "テスト文字列";
 		// Shift_JIS バイト列を ISO-8859-1 として読み込む
         byte[] sjisBytes = original.getBytes();
         String sjisAsIsoString = new String(sjisBytes, StandardCharsets.ISO_8859_1);
-		
+
 		//
 		// 実行
 		//
 		String result = EncodingUtil.convertToUTF8(sjisAsIsoString);
-		
+
 		//
 		// 検証
 		//
 		assertEquals(original, result);
 	}
-	
+
 	/**
 	 * <p>正常系：入力が null の場合、空文字列を返す。</p>
 	 * 
@@ -52,18 +52,17 @@ public class EncodingUtilTest {
 	 */
 	@Test
 	public void convertToUTF8Success02() throws Exception {
-		
+
 		//
 		// 事前準備
 		//
-		
 		String input = null;
-		
+
 		//
 		// 実行
 		//
 		String result = EncodingUtil.convertToUTF8(input);
-		
+
 		//
 		// 検証
 		//

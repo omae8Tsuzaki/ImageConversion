@@ -14,6 +14,7 @@ import jakarta.servlet.http.Part;
 public class FileValidator {
 
     private FileValidator() {
+    	// インスタンス化を防ぐためのコンストラクタ
     }
 
     /**

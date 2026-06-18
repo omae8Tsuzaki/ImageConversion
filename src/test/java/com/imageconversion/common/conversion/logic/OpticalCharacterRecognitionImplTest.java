@@ -19,7 +19,7 @@ import com.imageconversion.common.exception.LogicException;
  * </ul>
  */
 public class OpticalCharacterRecognitionImplTest {
-	
+
 	// OCR 結果の許容範囲（Levenshtein 距離）
 	private static final int OCR_THRESHOLD = 10;
 
@@ -30,7 +30,7 @@ public class OpticalCharacterRecognitionImplTest {
 	 */
 	@Test
 	public void resultOCRSuccess01() throws Exception {
-		
+
 		//
 		// 事前準備
 		//
@@ -38,14 +38,14 @@ public class OpticalCharacterRecognitionImplTest {
 		if (!input.exists()) {
 			throw new IllegalArgumentException("テストファイルが存在しません: " + input.getAbsolutePath());
 		}
-		
+
 		//
 		// 実行
 		//
 		OpticalCharacterRecognition ocrLogic = new OpticalCharacterRecognitionImpl();
 		String result = ocrLogic.resultOCR(input, "jpn");
 		System.out.println(result);
-		
+
 		//
 		// 検証
 		//
@@ -54,14 +54,14 @@ public class OpticalCharacterRecognitionImplTest {
 				+ "イメージスキャナーや写真で取り込まれた文書、 風景写真(風景内の看板の文字な\r\n"
 				+ "ど) 、 画像内の字幕 (テレビ放送画像内など) が使われる。 一般にOCRと中記され\r\n"
 				+ "る。\r\n";
-		
-		// Levenshtein 距離を計算して、OCR結果が許容範囲内かどうかを確認
+
+		// Levenshtein 距離を計算して、OCR 結果が許容範囲内かどうかを確認
 		LevenshteinDistance distance = new LevenshteinDistance(OCR_THRESHOLD);
 		int score = distance.apply(expected, result);
-		
+
 		assertTrue(score <= OCR_THRESHOLD, "OCR結果は許容範囲内です。Levenshtein 距離： " + score);
 	}
-	
+
 	/**
 	 * <p>異常系：存在しない言語コードを指定した場合。</p>
 	 * 
@@ -69,7 +69,7 @@ public class OpticalCharacterRecognitionImplTest {
 	 */
 	@Test
 	public void resultOCRError01() throws Exception {
-		
+
 		//
 		// 事前準備
 		//
@@ -77,7 +77,7 @@ public class OpticalCharacterRecognitionImplTest {
 		if (!input.exists()) {
 			throw new IllegalArgumentException("テストファイルが存在しません: " + input.getAbsolutePath());
 		}
-		
+
 		//
 		// 実行
 		//

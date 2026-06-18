@@ -72,10 +72,20 @@ public class TrimmingControllerTest {
 	 */
 	@Test
 	public void trimmingSuccess01() throws Exception {
+		
+		//
+		// 事前準備
+		//
 		setUpValidImage();
 
+		//
+		// 実行
+		//
 		String view = controller.trimming(imagePart, "10", "10", "100", "100", model);
 
+		//
+		// 検証
+		//
 		assertEquals("function/trimming", view);
 		assertNotNull(model.getAttribute("base64Image"));
 	}
@@ -87,8 +97,15 @@ public class TrimmingControllerTest {
 	 */
 	@Test
 	public void trimmingError01() throws Exception {
+		
+		//
+		// 実行
+		//
 		String view = controller.trimming(null, "10", "10", "100", "100", model);
 
+		//
+		// 検証
+		//
 		assertEquals("redirect:/function/trimming.jsp", view);
 	}
 
@@ -99,11 +116,21 @@ public class TrimmingControllerTest {
 	 */
 	@Test
 	public void trimmingError02() throws Exception {
+
+		//
+		// 事前準備
+		//
 		when(imagePart.getSize()).thenReturn(100L);
 		when(imagePart.getInputStream()).thenReturn(new ByteArrayInputStream("notanimage".getBytes()));
 
+		//
+		// 実行
+		//
 		String view = controller.trimming(imagePart, "10", "10", "100", "100", model);
 
+		//
+		// 検証
+		//
 		assertEquals("function/exceptionMessage", view);
 		assertTrue(((String) model.getAttribute("exception")).contains("無効な画像ファイルです"));
 	}
@@ -115,10 +142,20 @@ public class TrimmingControllerTest {
 	 */
 	@Test
 	public void trimmingError03() throws Exception {
+
+		//
+		// 事前準備
+		//
 		setUpValidImage();
 
+		//
+		// 実行
+		//
 		String view = controller.trimming(imagePart, "-1", "10", "50", "50", model);
 
+		//
+		// 検証
+		//
 		assertEquals("function/exceptionMessage", view);
 		assertEquals("トリミング範囲が不正です", model.getAttribute("exception"));
 	}
@@ -130,10 +167,20 @@ public class TrimmingControllerTest {
 	 */
 	@Test
 	public void trimmingError04() throws Exception {
+		
+		//
+		// 事前準備
+		//
 		setUpValidImage();
 
+		//
+		// 実行
+		//
 		String view = controller.trimming(imagePart, "10", "-1", "50", "50", model);
 
+		//
+		// 検証
+		//
 		assertEquals("function/exceptionMessage", view);
 		assertEquals("トリミング範囲が不正です", model.getAttribute("exception"));
 	}
@@ -145,10 +192,20 @@ public class TrimmingControllerTest {
 	 */
 	@Test
 	public void trimmingError05() throws Exception {
+		
+		//
+		// 事前準備
+		//
 		setUpValidImage();
 
+		//
+		// 実行
+		//
 		String view = controller.trimming(imagePart, "200", "10", "50", "50", model);
 
+		//
+		// 検証
+		//
 		assertEquals("function/exceptionMessage", view);
 		assertEquals("トリミング範囲が不正です", model.getAttribute("exception"));
 	}
@@ -160,10 +217,20 @@ public class TrimmingControllerTest {
 	 */
 	@Test
 	public void trimmingError06() throws Exception {
+		
+		//
+		// 事前準備
+		//
 		setUpValidImage();
 
+		//
+		// 実行
+		//
 		String view = controller.trimming(imagePart, "10", "200", "50", "50", model);
 
+		//
+		// 検証
+		//
 		assertEquals("function/exceptionMessage", view);
 		assertEquals("トリミング範囲が不正です", model.getAttribute("exception"));
 	}
@@ -175,10 +242,20 @@ public class TrimmingControllerTest {
 	 */
 	@Test
 	public void trimmingError07() throws Exception {
+
+		//
+		// 検証
+		//
 		setUpValidImage();
 
+		//
+		// 実行
+		//
 		String view = controller.trimming(imagePart, "10", "10", "0", "50", model);
 
+		//
+		// 検証
+		//
 		assertEquals("function/exceptionMessage", view);
 		assertEquals("トリミング範囲が不正です", model.getAttribute("exception"));
 	}
@@ -190,10 +267,20 @@ public class TrimmingControllerTest {
 	 */
 	@Test
 	public void trimmingError08() throws Exception {
+
+		//
+		// 事前準備
+		//
 		setUpValidImage();
 
+		//
+		// 実行
+		//
 		String view = controller.trimming(imagePart, "10", "10", "50", "0", model);
 
+		//
+		// 検証
+		//
 		assertEquals("function/exceptionMessage", view);
 		assertEquals("トリミング範囲が不正です", model.getAttribute("exception"));
 	}
@@ -205,10 +292,20 @@ public class TrimmingControllerTest {
 	 */
 	@Test
 	public void trimmingError09() throws Exception {
+
+		//
+		// 事前準備
+		//
 		setUpValidImage();
 
+		//
+		// 実行
+		//
 		String view = controller.trimming(imagePart, "100", "10", "100", "50", model);
 
+		//
+		// 検証
+		//
 		assertEquals("function/exceptionMessage", view);
 		assertEquals("トリミング範囲が不正です", model.getAttribute("exception"));
 	}
@@ -220,10 +317,20 @@ public class TrimmingControllerTest {
 	 */
 	@Test
 	public void trimmingError10() throws Exception {
+
+		//
+		// 事前準備
+		//
 		setUpValidImage();
 
+		//
+		// 実行
+		//
 		String view = controller.trimming(imagePart, "10", "100", "50", "100", model);
 
+		//
+		// 検証
+		//
 		assertEquals("function/exceptionMessage", view);
 		assertEquals("トリミング範囲が不正です", model.getAttribute("exception"));
 	}

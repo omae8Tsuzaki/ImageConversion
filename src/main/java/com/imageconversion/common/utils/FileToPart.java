@@ -19,17 +19,17 @@ import java.util.Map;
 import jakarta.servlet.http.Part;
 
 /**
- * <p>ファイルからPartオブジェクトを作成するユーティリティクラス。</p>
+ * <p>ファイルから Part オブジェクトを作成するユーティリティクラス。</p>
  */
 public final class FileToPart implements Part {
-	
+
 	private final String name;              // フォームのフィールド名
     private final File file;                // 元となるファイル
     private final String contentType;       // 推定コンテンツタイプ
     private final Map<String, List<String>> headers;
-    
+   
     /**
-     * <p>ファイルからPartオブジェクトを作成するコンストラクタ。</p>
+     * <p>ファイルから Part オブジェクトを作成するコンストラクタ。</p>
      * 
      * @param fieldName フィールド名
      * @param file ファイル
@@ -51,7 +51,7 @@ public final class FileToPart implements Part {
         addHeader("Content-Disposition",
                 String.format("form-data; name=\"%s\"; filename=\"%s\"", fieldName, file.getName()));
     }
-    
+
     private void addHeader(String key, String value) {
         headers.computeIfAbsent(key, k -> new ArrayList<>()).add(value);
     }
@@ -114,11 +114,11 @@ public final class FileToPart implements Part {
 	public Collection<String> getHeaderNames() {
 		return Collections.unmodifiableSet(headers.keySet());
 	}
-	
+
 	public File getFile() {
         return file;
     }
-	
+
 	// ファクトリ
     public static Part fromFile(String fieldName, File file) throws IOException {
         return new FileToPart(fieldName, file);

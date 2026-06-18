@@ -5,6 +5,8 @@ import java.io.File;
 
 import javax.imageio.ImageIO;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.imageconversion.common.exception.LogicException;
@@ -19,6 +21,9 @@ import net.sourceforge.tess4j.Tesseract;
 @Service
 public class OpticalCharacterRecognitionImpl implements OpticalCharacterRecognition{
 
+	// ログ出力の設定
+	private static final Logger LOGGER = LoggerFactory.getLogger(OpticalCharacterRecognitionImpl.class);
+
 	@Override
 	public String resultOCR(File input, String language) throws LogicException{
 		
@@ -26,17 +31,18 @@ public class OpticalCharacterRecognitionImpl implements OpticalCharacterRecognit
 		// Tesseract の設定
 		// データセット↓
 		// https://github.com/tesseract-ocr/tessdata/tree/main
-		
+
 		tesseract.setDatapath("src/main/resources/ocrDataset");
 		tesseract.setLanguage(language);
 		tesseract.setOcrEngineMode(ITessAPI.TessOcrEngineMode.OEM_LSTM_ONLY);
-		
+
 		try {
 			BufferedImage img = ImageIO.read(input);
 			// OCR 処理を実行
 			String result = tesseract.doOCR(img);
 			return result;
 		} catch (Exception e) {
+			LOGGER.error("OCR処理中にエラーが発生しました。");
 			throw new LogicException("OCR処理中にエラーが発生しました。", e);
 		}
 	}

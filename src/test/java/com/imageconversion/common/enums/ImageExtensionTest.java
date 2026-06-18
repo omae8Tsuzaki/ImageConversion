@@ -29,11 +29,11 @@ public class ImageExtensionTest {
 	 */
 	@Test
 	public void isValidExtensionSuccess01() throws Exception {
-		
+
 		//
 		// 事前準備
 		//
-		
+
 		// 正常系：有効な拡張子
 		String validExtension = "jpg";
 
@@ -48,7 +48,7 @@ public class ImageExtensionTest {
 		assertTrue(result);
 		assertEquals(validExtension, ImageExtension.JPG.getExtension());
 	}
-	
+
 	/**
 	 * <p>{@link ImageExtension#isValidExtension}の異常系テスト。</p>
 	 * <p>無効な拡張子が入力された場合</p>
@@ -57,19 +57,19 @@ public class ImageExtensionTest {
 	 */
 	@Test
 	public void isValidExtensionError01() throws Exception {
-		
+
 		//
 		// 事前準備
 		//
 
 		// 異常系：無効な拡張子
 		String validExtension = "pdf";
-		
+
 		//
 		// 実行
 		//
 		boolean result = ImageExtension.isValidExtension(validExtension);
-		
+
 		//
 		// 検証
 		//
@@ -89,13 +89,13 @@ public class ImageExtensionTest {
 		// 実行
 		//
 		boolean result = ImageExtension.isValidExtension(null);
-		
+
 		//
 		// 検証
 		//
 		assertFalse(result);
 	}
-	
+
 	/**
 	 * <p>{@link ImageExtension#getExtension}の正常系テスト。</p>
 	 * <p>各拡張子が正しく取得できるか検証</p>
@@ -104,11 +104,11 @@ public class ImageExtensionTest {
 	 */
 	@Test
 	public void getExtensionSuccess01() throws Exception {
-		
+
 		//
 		// 実行・検証
 		//
-		
+
 		assertEquals("jpg", ImageExtension.JPG.getExtension());
 		assertEquals("png", ImageExtension.PNG.getExtension());
 		assertEquals("gif", ImageExtension.GIF.getExtension());

@@ -29,13 +29,13 @@ public class OpticalCharacterRecognitionController {
 	/** 日本語固定の言語設定。 */
 	private static final String LANGUAGE = "jpn";
 
-	/** OCR処理ロジック。 */
+	/** OCR 処理ロジック。 */
 	private final OpticalCharacterRecognition opticalCharacterRecognition;
 
 	/**
 	 * <p>依存オブジェクトを注入してインスタンスを生成する。</p>
 	 *
-	 * @param opticalCharacterRecognition OCR処理ロジック
+	 * @param opticalCharacterRecognition OCR 処理ロジック
 	 */
 	public OpticalCharacterRecognitionController(OpticalCharacterRecognition opticalCharacterRecognition) {
 		this.opticalCharacterRecognition = opticalCharacterRecognition;

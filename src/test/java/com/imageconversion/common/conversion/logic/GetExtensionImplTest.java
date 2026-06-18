@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 import com.imageconversion.common.enums.ImageExtension;
 
 /**
- * <p>{@link GetExtension} のテストクラス。</p>
+ * <p>{@link GetExtensionImpl} のテストクラス。</p>
  * 
  * <h4>{@link GetExtensionImpl#getExtensionList} のテスト</h4>
  * <ul>
@@ -23,7 +23,7 @@ import com.imageconversion.common.enums.ImageExtension;
  *  <li>{@link #findImageExtensionError02} 異常系：引数が空文字列の場合</li>
  * </ul>
  */
-public class GetExtensionTest {
+public class GetExtensionImplTest {
 
 	/**
 	 * <p>正常系：拡張子一覧を取得できること。</p>
@@ -32,24 +32,24 @@ public class GetExtensionTest {
 	 */
 	@Test
 	public void getExtensionListSuccess01() throws Exception {
-		
+
 		//
 		// 事前準備
 		//
 		GetExtension logic = new GetExtensionImpl();
-		
+
 		//
 		// 実行
 		//
 		List<String> result = logic.getExtensionList();
-		
+
 		//
 		// 検証
 		//
 		List<String> expected = List.of("jpg", "png", "gif", "bmp");
 		assertEquals(expected, result);
 	}
-	
+
 	/**
 	 * <p>正常系：指定した拡張子文字列から ImageExtension を特定できること。</p>
 	 * 
@@ -57,6 +57,7 @@ public class GetExtensionTest {
 	 */
 	@Test
 	public void findImageExtensionSuccess01() throws Exception {
+
 		//
 		// 事前準備
 		//
@@ -72,7 +73,7 @@ public class GetExtensionTest {
 		//
 		assertEquals(ImageExtension.JPG, result);
 	}
-	
+
 	/**
 	 * <p>異常系：引数が null の場合。</p>
 	 * 
@@ -80,22 +81,26 @@ public class GetExtensionTest {
 	 */
 	@Test
 	public void findImageExtensionError01() {
-		
+
 		//
 		// 事前準備
 		//
 		GetExtension logic = new GetExtensionImpl();
 
+		//
 		// 実行
+		//
 		IllegalArgumentException expected = 
 				assertThrows(IllegalArgumentException.class, () -> {
 					logic.findImageExtension(null);
 				});
-		
+
+		//
 		// 検証
+		//
 		assertEquals("パラメータは null または空ではいけません。", expected.getMessage());
 	}
-	
+
 	/**
 	 * <p>異常系：引数が空文字列の場合。</p>
 	 * 
@@ -103,19 +108,23 @@ public class GetExtensionTest {
 	 */
 	@Test
 	public void findImageExtensionError02() throws Exception {
-		
+
 		//
 		// 事前準備
 		//
 		GetExtension logic = new GetExtensionImpl();
 
+		//
 		// 実行
+		//
 		IllegalArgumentException expected = 
 				assertThrows(IllegalArgumentException.class, () -> {
 					logic.findImageExtension("");
 				});
-		
+
+		//
 		// 検証
+		//
 		assertEquals("パラメータは null または空ではいけません。", expected.getMessage());
 	}
 

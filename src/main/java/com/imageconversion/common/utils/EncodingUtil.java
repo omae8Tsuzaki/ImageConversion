@@ -5,7 +5,7 @@ import java.nio.charset.StandardCharsets;
  * <p>文字エンコーディングに関するユーティリティクラス。</p>
  */
 public class EncodingUtil {
-	
+
 	private EncodingUtil() {
 		// インスタンス化を防ぐためのコンストラクタ
 	}
@@ -17,12 +17,12 @@ public class EncodingUtil {
 	 * @return 変換後の文字列（UTF-8 エンコード）
 	 */
 	public static String convertToUTF8(String input) {
-		// 入力がnullの場合は空文字列を返す
+		// 入力が null の場合は空文字列を返す
 		if (input == null) {
 			return "";
         }
-        
-        // Shift_JISからUTF-8に変換
+
+        // Shift_JIS から UTF-8 に変換
         return new String(input.getBytes(StandardCharsets.ISO_8859_1), StandardCharsets.UTF_8);
     }
 }

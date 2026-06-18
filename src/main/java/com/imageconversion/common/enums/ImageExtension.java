@@ -8,17 +8,17 @@ public enum ImageExtension {
     PNG("png"),
     GIF("gif"),
     BMP("bmp");
-	
+
 	private final String extension;
-	
+
 	ImageExtension(String extension) {
         this.extension = extension;
     }
-	
+
 	public String getExtension() {
         return extension;
     }
-	
+
 	/**
 	 * <p>指定された拡張子が有効な拡張子か判定するメソッド。</p>
 	 * 

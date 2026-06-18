@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class CalcImpl {
-	
+
 	/**
 	 * <p>2つの整数を加算するメソッド。</p>
 	 * 
@@ -18,5 +18,27 @@ public class CalcImpl {
 	 */
 	public int add(int a, int b) {
 		return a + b;
+	}
+
+	/**
+	 * <p>2つの小数を加算するメソッド。</p>
+	 *
+	 * @param a
+	 * @param b
+	 * @return 加算結果
+	 */
+	public double add(double a, double b) {
+		return a + b;
+	}
+
+	/**
+	 * <p>2つの整数を減算するメソッド。</p>
+	 *
+	 * @param a
+	 * @param b
+	 * @return 減算結果
+	 */
+	public int minus(int a, int b) {
+		return a - b;
 	}
 }

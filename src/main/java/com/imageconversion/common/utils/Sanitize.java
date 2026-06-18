@@ -4,11 +4,11 @@ package com.imageconversion.common.utils;
  * <p>サニタイズ処理を行うユーティリティクラス。</p>
  */
 public class Sanitize {
-	
+
 	private Sanitize() {
 		// インスタンス化を防ぐためのコンストラクタ
 	}
-	
+
 	/**
 	 * <p>特殊文字をエスケープする．</p>
 	 * 
@@ -26,7 +26,7 @@ public class Sanitize {
 	            .replace("\"", "&quot;")
 	            .replace("'", "&#39;");
 	}
-	
+
 	/**
 	 * <p>文字列を整数に変換する．</p>
 	 * 
@@ -39,7 +39,7 @@ public class Sanitize {
 		}
 		return Integer.parseInt(input);
 	}
-	
+
 	/**
 	 * <p>入力したファイル名から拡張子を取得する．</p>
 	 * 

@@ -4,6 +4,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.imageconversion.common.enums.ImageExtension;
@@ -13,6 +15,9 @@ import com.imageconversion.common.enums.ImageExtension;
  */
 @Service
 public class GetExtensionImpl implements GetExtension{
+
+	// ログ出力の設定
+	private static final Logger LOGGER = LoggerFactory.getLogger(GetExtensionImpl.class);
 
 	@Override
 	public List<String> getExtensionList() {
@@ -27,6 +32,7 @@ public class GetExtensionImpl implements GetExtension{
 		ImageExtension result = null;
 		
 		if (extParam == null || extParam.isEmpty()) {
+			LOGGER.error("{} が空です。", extParam);
             throw new IllegalArgumentException("パラメータは null または空ではいけません。");
         }
 

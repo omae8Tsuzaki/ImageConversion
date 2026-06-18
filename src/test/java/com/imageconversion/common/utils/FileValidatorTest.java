@@ -50,7 +50,7 @@ public class FileValidatorTest {
      */
     @Test
     public void isEmptyFilePartSuccess01() throws Exception {
-    	
+
     	//
     	// 実行・検証
     	//
@@ -64,12 +64,12 @@ public class FileValidatorTest {
      */
     @Test
     public void isEmptyFilePartSuccess02() throws Exception {
-    	
+
     	//
 		// 事前準備
 		//
         when(mockPart.getSize()).thenReturn(0L);
-        
+
         //
         // 実行・検証
         //
@@ -83,12 +83,12 @@ public class FileValidatorTest {
      */
     @Test
     public void isEmptyFilePartSuccess03() throws Exception {
-    	
+
     	//
 		// 事前準備
 		//
         when(mockPart.getSize()).thenReturn(100L);
-        
+
         //
         // 実行・検証
         //
@@ -102,7 +102,7 @@ public class FileValidatorTest {
      */
     @Test
     public void readImageSuccess01() throws Exception {
-    	
+
     	//
     	// 事前準備
     	//
@@ -116,7 +116,6 @@ public class FileValidatorTest {
         //
         // 検証
         //
-        
         assertNotNull(result);
         assertEquals(10, result.getWidth());
         assertEquals(10, result.getHeight());
@@ -129,14 +128,14 @@ public class FileValidatorTest {
      */
     @Test
     public void readImageError01() throws Exception {
-    	
+
     	//
     	// 事前準備
     	//
         when(mockPart.getInputStream()).thenReturn(new ByteArrayInputStream("notanimage".getBytes()));
 
         IOException e = assertThrows(IOException.class, () -> FileValidator.readImage(mockPart));
-        
+
         //
         // 検証
         //

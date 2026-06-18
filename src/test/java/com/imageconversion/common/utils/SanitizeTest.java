@@ -39,27 +39,24 @@ public class SanitizeTest {
 	 */
 	@Test
 	public void escapeHtmlSuccess01() throws Exception {
-		
+
 		//
 		// 事前準備
 		//
-		
 		String input = "<script>alert('XSS');</script>";
 		String expected = "&lt;script&gt;alert(&#39;XSS&#39;);&lt;/script&gt;";
 
 		//
 		// 実行
 		//
-		
 		String result = Sanitize.escapeHtml(input);
 
 		//
 		// 検証
 		//
-		
 		assertEquals(expected, result);
 	}
-	
+
 	/**
 	 * <p>正常系：& が含まれる文字列が入力された場合。</p>
 	 * 
@@ -67,27 +64,24 @@ public class SanitizeTest {
 	 */
 	@Test
 	public void escapeHtmlSuccess02() throws Exception {
-		
+
 		//
 		// 事前準備
 		//
-		
 		String input = "Hello & World";
 		String expected = "Hello &amp; World";
 
 		//
 		// 実行
-		//
-		
+		//		
 		String result = Sanitize.escapeHtml(input);
 
 		//
 		// 検証
 		//
-		
 		assertEquals(expected, result);
 	}
-	
+
 	/**
 	 * <p>正常系：null が入力された場合。</p>
 	 * 
@@ -95,27 +89,24 @@ public class SanitizeTest {
 	 */
 	@Test
 	public void escapeHtmlSuccess03() throws Exception {
-		
+
 		//
 		// 事前準備
 		//
-
 		String input = null;
 		String expected = "";
 
 		//
 		// 実行
 		//
-
 		String result = Sanitize.escapeHtml(input);
 
 		//
 		// 検証
 		//
-
 		assertEquals(expected, result);
 	}
-	
+
 	/**
 	 * <p>正常系：数値が入力された場合。</p>
 	 * 
@@ -123,25 +114,24 @@ public class SanitizeTest {
 	 */
 	@Test
 	public void parseStringToIntSuccess01() throws Exception {
-		
+
 		//
 		// 事前準備
 		//
-		
 		String input = "1";
-		
+
 		//
 		// 実行
 		//
 		int result = Sanitize.parseStringToInt(input);
-		
+
 		//
 		// 検証
 		//
 		int expected = 1;
 		assertEquals(expected, result);
 	}
-	
+
 	/**
 	 * <p>正常系：null が入力された場合。</p>
 	 * 
@@ -149,17 +139,17 @@ public class SanitizeTest {
 	 */
 	@Test
 	public void parseStringToIntSuccess02() throws Exception {
-		
+
 		//
 		// 事前準備
 		//
 		String input = null;
-		
+
 		//
 		// 実行
 		//
 		int result = Sanitize.parseStringToInt(input);
-		
+
 		//
 		// 検証
 		//
@@ -174,17 +164,17 @@ public class SanitizeTest {
 	 */
 	@Test
 	public void parseStringToIntSuccess03() throws Exception {
-		
+
 		//
 		// 事前準備
 		//
         String input = "";
-        
+
         //
         // 実行
         //
         int result = Sanitize.parseStringToInt(input);
-        
+
         //
         // 検証
         //
@@ -199,12 +189,12 @@ public class SanitizeTest {
 	 */
 	@Test
 	public void parseStringToIntError01() throws Exception {
-		
+
 		//
 		// 事前準備
 		//
 		String input = "abc";
-		
+
 		try {
 			//
 			// 実行
@@ -226,19 +216,18 @@ public class SanitizeTest {
 	 */
 	@Test
 	public void getFileExtensionSuccess01() throws Exception {
-		
+
 		//
 		// 事前準備
 		//
-		
 		String fileName = "test_image.jpg";
 		String expected = "jpg";
-		
+
 		//
 		// 実行
 		//
 		String result = Sanitize.getFileExtension(fileName);
-		
+
 		//
 		// 検証
 		//
@@ -252,19 +241,18 @@ public class SanitizeTest {
 	 */
 	@Test
 	public void getFileExtensionSuccess02() throws Exception {
-		
+
 		//
 		// 事前準備
 		//
-		
 		String notFileName = "abcdefg";
 		String expected = "";
-		
+
 		//
 		// 実行
 		//
 		String result = Sanitize.getFileExtension(notFileName);
-		
+
 		//
 		// 検証
 		//
@@ -278,17 +266,17 @@ public class SanitizeTest {
 	 */
 	@Test
 	public void getFileExtensionSuccess03() throws Exception {
-		
+
 		//
 		// 事前準備
 		//
 		String fileName = "no_extension.";
-		
+
 		//
 		// 実行
 		//
 		String result = Sanitize.getFileExtension(fileName);
-		
+
 		//
 		// 検証
 		//
@@ -302,11 +290,10 @@ public class SanitizeTest {
 	 */
 	@Test
 	public void getFileExtensionError01() throws Exception {
-		
+
 		//
 		// 事前準備
 		//
-		
 		String fileName = null;
 
 		//

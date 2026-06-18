@@ -9,6 +9,8 @@ import javax.imageio.ImageIO;
 
 import jakarta.servlet.http.Part;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.imageconversion.common.exception.LogicException;
@@ -20,7 +22,10 @@ import com.imageconversion.common.utils.Sanitize;
  */
 @Service
 public class SaveImageImpl implements SaveImage {
-	
+
+	// ログ出力の設定
+	private static final Logger LOGGER = LoggerFactory.getLogger(SaveImageImpl.class);
+
 	/**
 	 * <p>バイト配列から画像を指定されたディレクトリに保存する。</p>
 	 * 
@@ -38,6 +43,7 @@ public class SaveImageImpl implements SaveImage {
 			// バイト配列から画像を復元
 			BufferedImage image = ImageIO.read(new ByteArrayInputStream(imageBytes));
 			if (image == null) {
+				LOGGER.error("画像の復元に失敗しました。");
 	            throw new IOException();
 	        }
 			
@@ -49,16 +55,17 @@ public class SaveImageImpl implements SaveImage {
 	        
 	        // 拡張子取り出し
 	        String extension = Sanitize.getFileExtension(outputFileName);
-	        
+
 	        File outputFile = new File(dir, outputFileName);
 
 			ImageIO.write(image, extension, outputFile);
 			return outputFile.getAbsolutePath();
 		} catch (IOException e) {
+			LOGGER.error("画像の保存に失敗しました。");
 			throw new LogicException("画像の保存に失敗しました。", e);
 		}
 	}
-	
+
 	/**
 	 * <p>画像を指定されたディレクトリに保存する。</p>
 	 * 
@@ -72,9 +79,10 @@ public class SaveImageImpl implements SaveImage {
 		
 		try {
 			if (part == null || part.getSubmittedFileName() == null) {
+				LOGGER.error("無効なファイルがアップロードされました。");
 	            throw new IllegalArgumentException("無効なファイルです。");
 	        }
-			
+
 			// 元のファイル名を取得
 	        String originalFileName = part.getSubmittedFileName();
 
@@ -90,6 +98,7 @@ public class SaveImageImpl implements SaveImage {
 
 	        return savedFile.getAbsolutePath();
 		} catch (IllegalArgumentException | IOException e) {
+			LOGGER.error("画像の保存に失敗しました。");
 			throw new LogicException("画像の保存に失敗しました。", e);
 		} 
 		

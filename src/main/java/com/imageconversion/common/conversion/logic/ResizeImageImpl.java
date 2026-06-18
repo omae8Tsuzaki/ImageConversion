@@ -8,6 +8,8 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.imageconversion.common.exception.LogicException;
@@ -17,6 +19,9 @@ import com.imageconversion.common.exception.LogicException;
  */
 @Service
 public class ResizeImageImpl implements ResizeImage {
+
+	// ログ出力の設定
+	private static final Logger LOGGER = LoggerFactory.getLogger(ResizeImageImpl.class);
 
 	/**
 	 * <p>画像を指定された幅・高さにリサイズし、JPEG 形式のバイト配列を返す。</p>
@@ -41,6 +46,7 @@ public class ResizeImageImpl implements ResizeImage {
 			ImageIO.write(resizedImage, "jpg", baos);
 			return baos.toByteArray();
 		} catch (IOException e) {
+			LOGGER.error("画像のリサイズに失敗しました。");
 			throw new LogicException("画像のリサイズに失敗しました。", e);
 		}
 	}

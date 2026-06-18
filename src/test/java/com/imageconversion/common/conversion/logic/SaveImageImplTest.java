@@ -40,14 +40,14 @@ public class SaveImageImplTest {
 	// テスト用
 	@TempDir
     private File temporaryFolder;
-	
+
 	private byte[] imageBytes;
-	
+
 	// 出力ファイル名
 	private static String OUTPUT_FILENAME = "test.jpg";
-	
+
 	private SaveImage logic = new SaveImageImpl();
-	
+
 	/**
 	 * <p>テストの前処理。</p>
 	 * 
@@ -61,7 +61,7 @@ public class SaveImageImplTest {
         ImageIO.write(image, "png", baos);
         imageBytes = baos.toByteArray();
 	}
-	
+
 	/**
 	 * <p>正常系：画像を指定されたディレクトリに保存する。</p>
 	 * 
@@ -69,11 +69,11 @@ public class SaveImageImplTest {
 	 */
 	@Test
 	public void saveImageSuccess01() throws Exception {
-		
+
 		//
 		// 事前準備
 		//
-		
+
 		// 出力先ディレクトリのパスを取得
 		String dirPath = temporaryFolder.getAbsolutePath();
 
@@ -81,13 +81,13 @@ public class SaveImageImplTest {
 		// 実行
 		//
 		String result = logic.saveImage(imageBytes, dirPath, OUTPUT_FILENAME);
-		
+
 		//
 		// 検証
 		//
 		assertEquals(dirPath + File.separator + OUTPUT_FILENAME, result);
 	}
-	
+
 	/**
 	 * <p>正常系：出力先ディレクトリが存在しない場合、ディレクトリを作成する。</p>
 	 *
@@ -95,26 +95,26 @@ public class SaveImageImplTest {
 	 */
 	@Test
 	public void saveImageSuccess02() throws Exception {
-		
+
 		//
 		// 事前準備
 		//
-		
+
 		// 出力先ディレクトリのパスを取得
 		File outputFile = new File(temporaryFolder, "test");
 		String dirPath = outputFile.getAbsolutePath();
-		
+
 		//
 		// 実行
 		//
 		String result = logic.saveImage(imageBytes, dirPath, OUTPUT_FILENAME);
-		
+
 		//
 		// 検証
 		//
 		assertEquals(dirPath + File.separator + OUTPUT_FILENAME, result);
 	}
-	
+
 	/**
 	 * <p>異常系：無効な画像データを保存しようとした場合。</p>
 	 * 
@@ -122,12 +122,12 @@ public class SaveImageImplTest {
 	 */
 	@Test
 	public void saveImageError01() throws Exception {
-		
+
 		//
 		// 事前準備
 		//
 		byte[] invalidBytes = "not-an-image".getBytes();
-		
+
 		//
 		// 実行
 		//
@@ -135,13 +135,13 @@ public class SaveImageImplTest {
 				assertThrows(LogicException.class, () -> {
 					logic.saveImage(invalidBytes, temporaryFolder.getAbsolutePath(), OUTPUT_FILENAME);
 				});
-		
+
 		//
 		// 検証
 		//
 		assertEquals("画像の保存に失敗しました。", expected.getMessage());
 	}
-	
+
 	/**
 	 * <p>正常系テスト。</p>
 	 * 
@@ -149,67 +149,72 @@ public class SaveImageImplTest {
 	 */
 	@Test
 	public void savePartImageSuccess01() throws Exception {
-		
+
 		//
 		// 事前準備
 		//
-		
+
 		// 出力先ディレクトリのパスを取得
 		String dirPath = temporaryFolder.getAbsolutePath();
-		
+
 		// モックのPartオブジェクトを作成
 		Part mockPart = mock(Part.class);
 		when(mockPart.getSubmittedFileName()).thenReturn(OUTPUT_FILENAME);
-		
+
 	    //
 		// 実行
 	    //
 		String testImage = logic.savePartImage(mockPart, dirPath);
-		
+
 		//
 		// 検証
 		//
 		String expected = dirPath + File.separator + OUTPUT_FILENAME;
 		assertEquals(expected, testImage);
 	}
-	
+
 	/**
-	 * <p>正常系：Partオブジェクトのファイル名が指定されている場合。</p>
+	 * <p>正常系：Part オブジェクトのファイル名が指定されている場合。</p>
 	 * 
 	 * @throws Exception 想定外のエラーが発生した場合
 	 */
 	@Test
 	public void savePartImageSuccess02 () throws Exception {
+
+		//
+		// 事前準備
+		//
+
 		// 出力先ディレクトリのパスを取得
 		File outputFile = new File(temporaryFolder, "test");
 		String dirPath = outputFile.getAbsolutePath();
-		
-		// モックのPartオブジェクトを作成
+
+		// モックの Part オブジェクトを作成
 		Part mockPart = mock(Part.class);
 		when(mockPart.getSubmittedFileName()).thenReturn(OUTPUT_FILENAME);
-		
+
 	    //
 		// 実行
 	    //
 		String testImage = logic.savePartImage(mockPart, dirPath);
-		
+
 		//
 		// 検証
 		//
 		String expected = dirPath + File.separator + OUTPUT_FILENAME;
 		assertEquals(expected, testImage);
 	}
-	
+
 	/**
-	 * <p>異常系：Partオブジェクトがnullの場合。</p>
+	 * <p>異常系：Part オブジェクトが null の場合。</p>
 	 * 
 	 * @thows Exception 想定外のエラーが発生した場合
 	 */
 	@Test
 	public void savePartImageError01() throws Exception {
-		// モックのPartオブジェクトを作成
+		// モックの Part オブジェクトを作成
 		Part mockPart = null;
-		
+
 		//
 		// 実行
 	    //
@@ -223,15 +228,20 @@ public class SaveImageImplTest {
 		//
 		assertEquals("画像の保存に失敗しました。", expected.getMessage());
 	}
-	
+
 	/**
-	 * <p>異常系：Partオブジェクトのファイル名がnullの場合。</p>
+	 * <p>異常系：Part オブジェクトのファイル名が null の場合。</p>
 	 * 
 	 * @throws Exception 想定外のエラーが発生した場合
 	 */
 	@Test
 	public void savePartImageError02() throws Exception {
-		// モックのPartオブジェクトを作成
+
+		//
+		// 事前準備
+		//
+
+		// モックの Part オブジェクトを作成
 		Part mockPart = mock(Part.class);
 		when(mockPart.getSubmittedFileName()).thenReturn(null);
 
